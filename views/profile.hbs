@@ -1,0 +1,433 @@
+{{> header}}
+<script>
+    
+  var appUrl ="{{appUrl}}"
+  var storeHash="{{storeHash}}"
+</script>
+<div class="main-con">
+    <div class="profile-box profile-top">
+        <div class="profile-top-con">
+            <p class="title">Dealer Profile</p>
+            <p>Thank you for choosing CPS - superior warranty protection for total peace of mind!</p>
+
+            <p id="modal-btn" class="button">Contact Us</p>
+
+        </div>
+        <div class="profile-top-con">
+            <img src="https://s3.amazonaws.com/cdn.cpscentral.com/images/unnamed.jpg">
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="profile-box profile-left">
+            <p class="title">Contacts</p>
+            <p class="p-small purple-txt">Name:</p>
+            <p>{{contacts.name}}</p>
+            <p class="p-small purple-txt">Title:</p>
+            <p>{{contacts.title}}</p>
+            <p class="p-small purple-txt">Phone:</p>
+            <p>{{contacts.phone}}</p>
+            <p class="p-small purple-txt">Email:</p>
+            <p>{{contacts.email}}</p>
+        </div>
+        <div class="profile-right">
+            <div class="profile-box profile-r-box">
+                <p class="title">Dealer Information</p>
+                <div class="flex-container">
+                    <div class="dealer-box">
+                        <p class="purple-txt">Dealer ID:</p>
+                        <p>{{dealerinfo.id}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">URL</p>
+                        <p>{{dealerinfo.domain}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">Phone:</p>
+                        <p>{{dealerinfo.DEALER_PHONE}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">Fax:</p>
+                        <p>{{dealerinfo.DEALER_FAX}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">Address:</p>
+                        <p>{{dealerinfo.DEALER_ADDRESS1}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">City:</p>
+                        <p>{{dealerinfo.DEALER_CITY}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">State:</p>
+                        <p>{{dealerinfo.DEALER_STATE}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">Zip:</p>
+                        <p>{{dealerinfo.DEALER_ZIP}}</p>
+                    </div>
+                    <div class="dealer-box">
+                        <p class="purple-txt">Country:</p>
+                        <p>{{dealerinfo.DEALER_COUNTRY}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="reps-con profile-box profile-r-box">
+                <p class="title">Reps</p>
+                <div class="reps-box">
+
+                     {{#each reps}}
+                          <p class="purple-txt">{{this.admin_name}}</p>
+                    <div class="flex-container">
+                        <p>
+                            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="#737DF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            {{this.direct_dial}}
+                        </p>
+                        <p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#737DF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <a style="text-decoration:none;" href="mailto:{{this.EMAIL}}">{{this.EMAIL}}</a>
+                        </p>
+                    </div>
+                     {{/each}}
+                   
+                    <p>Your CPS Dealer Team, please feel free to reach out to us directly for assistance.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- The Modal -->
+<div id="modalMain" class="message-modal modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <p><i class="far fa-edit"></i>Message</p>
+        </div>
+        
+           <textarea name="textbody" id="txtEmailBody"></textarea>
+            <p class="message-btns">
+            <button type="button" id="submitEmail" class="purple-btn">Send</button>
+            <button  type="button" class="close"  id="cancelEmail">Cancel</button>
+            </p>
+    </div>
+
+</div>
+
+<script>
+     $("#submitEmail").click(function(){
+         fetch(`${appUrl}/form_submit?appurl=&storehash=${storeHash}`,{   
+            method: "POST",
+            body: JSON.stringify({
+               textbody: $("#txtEmailBody").val()
+            }),
+         
+            headers: {
+               "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+               .then(data => {
+                  console.log(data); // JSON data parsed by `data.json()` call
+        });
+        modal.style.display = "none";
+        $("#txtEmailBody").val("");
+   });
+
+   $("#cancelEmail").click(function(){
+         modal.style.display = "none";
+   });
+	// Get the modal
+	var modal = document.getElementById("modalMain");
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("modal-btn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+</script>
+
+<style>
+
+    .profile-top {
+        display: flex;
+        align-items: center;
+    }
+    .profile-top-con {
+        width: 100%;
+    }
+    .profile-top-con img {
+        height: 240px;
+        float: right;
+    }
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .profile-box {
+        padding: 30px;
+        background-color: #ffffff;
+        margin-bottom: 25px;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(231,231,231,1);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(231,231,231,1);
+        box-shadow: 0px 0px 10px 0px rgba(231,231,231,1);
+    }
+    .profile-top {
+        padding: 40px;
+    }
+    .profile-top p {
+        line-height: 24px;
+        margin-top: 0;
+        font-size: 15px;
+        margin-bottom: 22px;
+    }
+    
+    .profile-top .title, .title {
+        font-size: 22px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .profile-box .button {
+        display: inline-block;
+        cursor: pointer;
+        color:#ffffff;
+        border-radius:  5px;
+        padding: 8px 15px;
+        background-color: #737DF6;
+        text-decoration: none;
+    }
+    .profile-box .button:hover {
+        transition-duration: 250ms;
+        opacity: 0.8;
+    }
+    .purple-txt {
+        color: #737DF6;
+        font-weight: 500;
+    }
+    .main-con {
+        background-color: #F7F8FA;
+    }
+    .flex-container {
+        display: flex;
+        flex: auto;
+        width: 100%;
+    }
+    .flex-container .profile-left {
+        width: 280px;
+        margin-right: 24px;
+        height: 275px;
+    }
+    .flex-container .profile-left .title {
+        margin: 0 0 20px;
+        font-size: 18px;
+    }
+    .flex-container .profile-left p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+    .flex-container .profile-left .purple-txt {
+        font-size: 12px;
+        margin-top: 20px;
+    }
+    .flex-container .profile-right {
+        width: calc(100% - 305px);
+    }
+    .flex-container .title {
+        font-size: 18px;
+        margin-top: 0;
+    }
+    .profile-right .flex-container {
+        flex-wrap: wrap;
+    }
+    .dealer-box {
+        width: 50%;
+        margin-bottom: 20px;
+    }
+    .dealer-box p {
+        margin: 4px 0px;
+        font-size: 14px;
+    }
+    .dealer-box p.purple-txt {
+        font-size: 16px;
+    }
+    .reps-box svg {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: -2px;
+        left: 0px;
+    }
+    .reps-box p {
+        width: 100%;
+    }
+    .reps-box .flex-container {
+        flex-wrap: nowrap;
+        box-sizing: border-box;
+        padding: 0 30px 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #dedfe1;
+    }
+    
+    .reps-con.profile-box {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .reps-con p {
+        padding: 0 30px;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .reps-con .title {
+        margin-bottom: 20px;
+    }
+    .reps-con .reps-box .flex-container p {
+        padding: 0 0 0 30px;
+        position: relative;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+
+    /* modal css */
+
+    /* The Modal (background) */
+	.modal {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 99999; /* Sit on top */
+	  padding-top: 100px; /* Location of the box */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content */
+	.modal-content {
+	  position: relative;
+	  background-color: #fefefe;
+	  margin: auto;
+	  padding: 0;
+	  border-radius: 5px;
+	  border: 1px solid #888;
+	  width: calc(100% - 20px);
+      max-width: 770px;
+	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	  -webkit-animation-name: animatetop;
+	  -webkit-animation-duration: 0.4s;
+	  animation-name: animatetop;
+	  animation-duration: 0.4s
+	}
+
+	/* Add Animation */
+	@-webkit-keyframes animatetop {
+	  from {top:-300px; opacity:0} 
+	  to {top:0; opacity:1}
+	}
+
+	@keyframes animatetop {
+	  from {top:-300px; opacity:0}
+	  to {top:0; opacity:1}
+	}
+
+		/* The Close Button */
+	.modal-header .close {
+	    font-size: 45px;
+	    font-weight: 300;
+	    cursor: pointer;
+	    position: absolute;
+	    height: 29px;
+	    line-height: 36px;
+	    top: 9px;
+    	right: 9px;
+	    transition-duration: 250ms;
+	    color: #7b889f;
+	    border: 1px solid #ffffff;
+	    width: 36px;
+	    height: 36px;
+	}
+	.modal-header .close:hover {
+		border: 1px solid #3d405c;
+		color:#3d405c;
+	}
+
+	.modal-header {
+	  padding: 18px 16px;
+	  position: relative;
+	  text-align: center;
+	  border-bottom: 1px solid #e7e7e7;
+	}
+
+    .message-modal textarea {
+        padding: 20px;
+        margin: 20px 25px 0;
+        width: calc(100% - 91px);
+        height: 200px;
+        font-size: 16px;
+        resize: none;
+        border:1px solid #dadada;
+        outline: none !important;
+    }
+    .message-modal textarea:focus {
+        border:1px solid #cdcdcd;
+    }
+    
+
+    .message-modal button {
+        border-radius: 3px;
+        border: none;
+        padding: 7px;
+        text-align: center;
+        background-color: #e7e7e7;
+        font-weight: 600;
+        width: 70px;
+        cursor: pointer;
+    }
+
+    .message-modal button:hover {
+        transition-duration: 250ms;
+        opacity: 0.8;
+    }
+    
+    .message-modal button.purple-btn {
+        background-color: rgb(125, 44, 255);
+        color: #ffffff;
+        margin-right: 5px;
+    }
+
+    .message-modal .modal-header p {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .message-modal .modal-header .far {
+        margin-right: 5px;
+    }
+    .message-btns {
+        margin: 20px 25px 25px;
+    }
+
+
+</style>

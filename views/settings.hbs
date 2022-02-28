@@ -1,0 +1,1586 @@
+{{> header}}
+
+
+
+<script>
+
+
+  
+   $(document).ready(function() {
+
+    var cart_live = {{details.cart_live }}
+    var product_live = {{details.product_live}}
+    var jump_page = {{ details.jump_page}}
+    var post_sale = {{details.post_sale}}
+     var annual_monthly = {{details.annual_monthly}}
+     var color = '{{details.color}}'
+      var borderPx = {{details.border_px}} + "px"
+      var fontFamily = '{{details.font_family}}'
+      var offeringType = {{details.offering_type}}
+      var offerBoth = {{details.offer_monthly_and_annual}}
+
+      if(offerBoth == true){
+         $(".trmonthlyannual").hide()
+      }
+    console.log(cart_live, product_live, jump_page, post_sale,annual_monthly,color,borderPx,fontFamily,offeringType, offerBoth)
+    $(".save-changes").click(function(){
+      var obj = {
+         "offering_type": $(".style-change").val(),
+         "font_family": $(".font-selector").val(),
+         "color": $(".color-selector").val(),
+         "border_px":  $(".range-selector").val(),
+         "border_selected_px":  $(".range-selector-width").val()
+      }
+
+      fetch('/updateSettings2', {
+            method: 'post',
+            credentials: 'include',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj)
+         }).then(function(response) {
+            return response.json();
+         }).then(function(data) {
+            console.log(data)
+            $(".save-changes").hide()
+            $(".updated-text").show()
+         });
+       
+
+    })
+
+    $(".style-change").change(function() {
+        console.log($(this).val())
+         var action = "offering_type"
+         var actionResult = $(this).val()
+        $(".radiobuttons").toggle()
+        $(".dropdown").toggle()
+        $(".offering1options").toggle()
+
+           $(".save-changes").show()
+            $(".updated-text").hide()
+
+
+      //  fetch('/updateSettings', {
+         //   method: 'post',
+          //  credentials: 'include',
+          //  headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          //  body: JSON.stringify({action, actionResult})
+        // }).then(function(response) {
+           // return response.json();
+        // }).then(function(data) {
+          //  console.log(data)
+        // });
+    })
+
+    $(".font-selector").change(function() {
+        console.log($(this).val())
+        $(".term-length").css("font-family", $(this).val())
+        $(".plan-price").css("font-family", $(this).val())
+        $(".caption-text").css("font-family", $(this).val())
+        $(".caption-text2").css("font-family", $(this).val())
+        $(".dropdown-text").css("font-family", $(this).val())
+        $(".price-currency-sym").css("font-family", $(this).val())
+
+  $(".save-changes").show()
+            $(".updated-text").hide()
+
+        var action = "font_family"
+         var actionResult = $(this).val()
+
+        // fetch('/updateSettings', {
+           // method: 'post',
+           // credentials: 'include',
+          //  headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+           // body: JSON.stringify({action, actionResult})
+        // }).then(function(response) {
+          //  return response.json();
+        // }).then(function(data) {
+         //   console.log(data)
+        // });
+
+      
+    })
+
+    $(".color-selector").change(function() {
+        console.log($(this).val())
+        $(".btn-warranty2:eq(0)").css("background-color", $(this).val())
+   $(".btn-warranty3:eq(0)").css("background-color", $(this).val())
+        var action = "color"
+         var actionResult = $(this).val()
+
+           $(".save-changes").show()
+            $(".updated-text").hide()
+
+
+    //  fetch('/updateSettings', {
+         //   method: 'post',
+         //   credentials: 'include',
+         //   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          //  body: JSON.stringify({action, actionResult})
+        // }).then(function(response) {
+         //   return response.json();
+        // }).then(function(data) {
+         //   console.log(data)
+        // });
+      
+    })
+
+     $(".range-selector").change(function() {
+
+        var action = "border_px"
+         var actionResult = $(this).val()
+
+        console.log($(this).val())
+         $(".btn-warranty2").css("border-radius", $(this).val() + "px")
+          $(".btn-warranty3").css("border-radius", $(this).val() + "px")
+
+  $(".save-changes").show()
+            $(".updated-text").hide()
+
+         // fetch('/updateSettings', {
+         //   method: 'post',
+          //  credentials: 'include',
+          //  headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          //  body: JSON.stringify({action, actionResult})
+        // }).then(function(response) {
+        //    return response.json();
+        // }).then(function(data) {
+        //    console.log(data)
+        // });
+      
+    })
+
+
+
+      $(".range-selector-width").change(function() {
+
+        var action = "border_selected_px"
+         var actionResult = $(this).val()
+
+        console.log($(this).val())
+     
+
+          $(".button-warranty-range-width").css("border", `${$(this).val()}px solid  #808080` )
+
+  $(".save-changes").show()
+            $(".updated-text").hide()
+
+         // fetch('/updateSettings', {
+         //   method: 'post',
+          //  credentials: 'include',
+          //  headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          //  body: JSON.stringify({action, actionResult})
+        // }).then(function(response) {
+        //    return response.json();
+        // }).then(function(data) {
+        //    console.log(data)
+        // });
+      
+    })
+
+
+
+
+
+    $(".action").change(function() {
+        var obj = $(this)
+        var action = obj.data("action")
+        var actionResult = ""
+
+        switch (action) {
+            case "product_live":
+                console.log("product")
+                product_live = !product_live
+                actionResult = product_live
+                break;
+            case "annual_monthly":
+                console.log("annual_monthly")
+                annual_monthly = !annual_monthly
+                actionResult = annual_monthly
+                break;
+            case "cart_live":
+                console.log("cart_options")
+                cart_live = !cart_live
+                actionResult = cart_live
+                break;
+            case "jump_page":
+                console.log("jump_page")
+                jump_page = !jump_page
+                actionResult = jump_page
+                break;
+            case "post_sale":
+                console.log("post_Sale")
+                post_sale = !post_sale    
+                actionResult = post_sale       
+                break;
+            case "offer_monthly_and_annual":
+            console.log("offer both")
+            offerBoth = !offerBoth    
+            actionResult = offerBoth      
+            
+            if(actionResult == true){
+               console.log("true")
+            $(".trmonthlyannual").hide()
+            }else{
+              $(".trmonthlyannual").show()
+            }
+            break;
+            default:
+                // code block
+        }
+
+
+        fetch(`${HOST}/updateSettings`, {
+            method: 'post',
+            credentials: 'include',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({action, actionResult})
+         }).then(function(response) {
+            return response.json();
+         }).then(function(data) {
+            console.log(data)
+         });
+    })
+})
+    
+
+
+</script>
+
+<div class="settings-main">
+
+   <div class="settings-top box-shadow-con">
+      <p class="breadcrumbs"><u>Back to Results</u> / <u>Sale</u> / <u>Jewelry & Accessories</u>
+         <span class="purple-txt">Next</span>
+         <span>Previous</span>
+      </p>
+      <div class="settings-flex">
+         <div class="settings-top-l">
+            <p class="condition-tag">New</p>
+            <div class="settings-img-con">
+               <img src="https://s3.amazonaws.com/cdn.cpscentral.com/images/watch.jpg">
+            </div>
+         </div>
+         <div class="settings-top-r">
+            <p><b>Movado</b></p>
+            <p>BOLD Watch, 34mm</p>
+            <p class="desc-title red-txt"><b>NOW $346.50</b> (30% OFF)</p>
+            <p>ORIG. $495.00</p>
+            <p class="desc-title"><b>Color:</b> Silver</p>
+            <p>Web ID: 809653</p>
+
+                       {{#ifEquals details.offering_type 1}}
+                       <div class="cps_cart radiobuttons">
+  <div style="margin-top:10px" class="caption">
+                     <div style="font-size: 13px; margin-right:80px; float:left;  color: black; margin-bottom:20px; font-family: {{details.font_family}};" class="caption-text">Add an extended warranty from <span style="color:black;"><img style="width:65px; vertical-align:middle; margin-left:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png"><a style="vertical-align:middle" target="_blank" href="https://www.cpscentral.com/warranty-coverage.aspx?type=EX"><img style="margin-left:5px; height:12px; margin-bottom:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px"></a></span></div>
+                  </div>            {{!-- <div class="warranty-btns">
+               <p class="warranty-btn purple-bg">1 Year<br><b>$9.99</b></p>
+               <p class="warranty-btn">2 Year<br><b>$12.99</b></p>
+            </div> --}}
+
+                  <div class="warranty-btns ">
+                  <button style="padding:15px; width:23%; border-radius:{{details.border_px}}px; border:{{details.border_selected_px}}px solid  #808080; !important; background-color:{{details.color}}; !important; color: white !important;" warranty-attr="37285763285146" class="btn-warranty3 button-warranty-range-width button-warranty btn-offer" type="button">
+                        <div><span style="font-family:{{details.font_family}};" class="term-length"> <strong>1  Year</strong></span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700 " class="price-amt">57.99</span></span></div>
+                     </button>
+                     <button style="padding:15px; width:23%;border-radius:{{details.border_px}}px;" warranty-attr="37285763645594" class="btn-warranty3 button-warranty btn-offer" type="button">
+                        <div><span style="font-family:{{details.font_family}}" class="term-length"><strong>2  Years</strong> </span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700" class="price-amt">69.99</span></span></div>
+                     </button>
+            </div> 
+            </div>
+                  {{else}}
+       
+
+                  <div style="display:none" class="cps_cart radiobuttons">
+  <div style="margin-top:10px" class="caption">
+                     <div style="font-size: 13px; margin-right:80px; float:left;  color: black; margin-bottom:20px; font-family: {{details.font_family}};" class="caption-text">Add an extended warranty from <span style="color:black;"><img style="width:65px; vertical-align:middle; margin-left:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png"><a style="vertical-align:middle" target="_blank" href="https://www.cpscentral.com/warranty-coverage.aspx?type=EX"><img style="margin-left:5px; height:12px; margin-bottom:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px"></a></span></div>
+                  </div>            {{!-- <div class="warranty-btns">
+               <p class="warranty-btn purple-bg">1 Year<br><b>$9.99</b></p>
+               <p class="warranty-btn">2 Year<br><b>$12.99</b></p>
+            </div> --}}
+
+                  <div class="warranty-btns ">
+                  <button style="padding:15px; width:23%; border-radius:{{details.border_px}}px; border:{{details.border_selected_px}}px solid  #808080; !important; background-color:{{details.color}}; !important; color: white !important;" warranty-attr="37285763285146" class="btn-warranty3 button-warranty button-warranty-range-width btn-offer" type="button">
+                        <div><span style="font-family:{{details.font_family}};" class="term-length"> <strong>1  Year</strong></span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700 " class="price-amt">57.99</span></span></div>
+                     </button>
+                     <button style="padding:15px; width:23%;border-radius:{{details.border_px}}px;" warranty-attr="37285763645594" class="btn-warranty3 button-warranty btn-offer" type="button">
+                        <div><span style="font-family:{{details.font_family}}" class="term-length"><strong>2  Years</strong> </span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700" class="price-amt">69.99</span></span></div>
+                     </button>
+            </div> 
+            </div>
+
+                      {{/ifEquals}}
+
+                        {{#ifEquals details.offering_type 2}}
+                  <div class="dropdown">
+   <div  style="margin-top:20px; margin-bottom:20px;" id="cps_cart">
+      <div class="dropdown-text" style="font-size: 13px; color: black;">
+         <strong>Add Accidental protection from</strong> <span style=color:"black">
+         <img style="width:65px; vertical-align:middle; margin-top: 8px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png" 
+         id="gsslider13" />
+         <img style="margin-left:5px; height:12px; margin-top:10px; vertical-align:top;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px" id="gsslider14" /></span></div>
+            
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 2 Years of Warranty Protection for $22.99</label> 
+         </p>
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 3 Years of Warranty Protection for $32.99 </label> 
+         </p>
+   </div>
+      </div>
+
+                  {{else}}
+                  <div style="display:none" class="dropdown">
+   <div style="margin-top:20px; margin-bottom:20px;" id="cps_cart">
+      <div class="dropdown-text" style="font-size: 13px; color: black;">
+         <strong>Add Accidental protection from</strong> <span style=color:"black">
+         <img style="width:65px; vertical-align:middle; margin-top: 8px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png" 
+         id="gsslider13" />
+         <img style="margin-left:5px; height:12px; margin-top:10px; vertical-align:top;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px" id="gsslider14" /></span></div>
+            
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 2 Years of Warranty Protection for $22.99</label> 
+         </p>
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 3 Years of Warranty Protection for $32.99 </label> 
+         </p>
+   </div>
+   </div>
+                  {{/ifEquals}}
+         
+            <p><b>CONDITION:</b> New</p>
+            <div class="social-icons">
+               <span><i class="fab fa-pinterest-p"></i></span>
+               <span><i class="fab fa-facebook-f"></i></span>
+               <span><i class="fab fa-twitter"></i></span>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="settings-bot">
+      <div class="settings-bot-box box-shadow-con">  
+         <h3>Warranty Options</h3>
+         <span><b>Product Page</b></span>
+            <table>
+            <tr>
+               <td><p>Disabled</p></td>
+               <td>  
+                  <p>
+                     <label style="margin-top:-7px;" class="switch">
+                        {{#if details.product_live}}
+                        <input data-action="product_live" class="action" type="checkbox" checked>
+                        {{else}}
+                        <input data-action="product_live" class="action" type="checkbox">
+                        {{/if}}
+                        <span class="slider round"></span>
+                     </label>
+                  </p>
+               </td>
+               <td><p>Enabled</p></td>
+            </tr>
+         </table>
+         
+         {{!-- <span><b>Cart Page</b></span>
+            <table>
+            <tr>
+               <td><p>Disabled</p></td>
+               <td>  
+                  <p>
+                     <label style="margin-top:-7px;" class="switch">
+                        {{#if details.cart_live}}
+                        <input data-action="cart_live" class="action" type="checkbox" checked>
+                        {{else}}
+                        <input data-action="cart_live" class="action" type="checkbox">
+                        {{/if}}
+                        <span class="slider round"></span>
+                     </label>
+                  </p>
+               </td>
+               <td><p>Enabled</p></td>
+            </tr>
+         </table> --}}
+         <span><b>Jump Page</b></span><a style="margin-left:10px;" id="warrantyModal-btn" href="#">Preview</a>
+            <table>
+            <tr>
+               <td><p>Disabled</p></td>
+               <td>  
+                  <p>
+                     <label style="margin-top:-7px;" class="switch">
+                        {{#if details.jump_page}}
+                        <input data-action="jump_page" class="action" type="checkbox" checked>
+                        {{else}}
+                        <input data-action="jump_page" class="action" type="checkbox">
+                        {{/if}}
+                        <span class="slider round"></span>
+                     </label>
+                  </p>
+               </td>
+               <td><p>Enabled</p></td>
+            </tr>
+         </table> 
+         
+         {{!-- <span style="font-size: 16px;">Post Sale</span>
+         
+         
+            <table>
+            <tr>
+               <td>Disabled</td>
+               <td>  <label style="margin-top:-7px;" class="switch">
+                     {{#if details.post_sale}}
+                  <input data-action="post_sale" class="action" type="checkbox" checked>
+                  {{else}}
+                  <input data-action="post_sale" class="action" type="checkbox">
+                  {{/if}}
+               <span class="slider round"></span>
+               </label></td>
+               <td>Enabled</td>
+            </tr>
+         </table> --}}
+         
+      </div>
+
+      <div class="settings-bot-box box-shadow-con">
+
+         <h3>Warranty Offering</h3>
+
+         <table>
+            <tr>
+               <td>Disabled</td>
+               <td>  <label style="margin-top:-7px;" class="switch">
+                     {{#if details.product_live}}
+                     <input data-action="product_live" class="action" type="checkbox" checked>
+                     {{else}}
+                     <input data-action="product_live" class="action" type="checkbox">
+                     {{/if}}
+               <span class="slider round"></span>
+               </label></td>
+               <td>Enabled</td>
+            </tr>
+            
+            {{!-- <tr class="trmonthlyannual">
+               <td><p>Monthly</p></td>
+               <td>  
+                  <p>
+                     <label style="margin-top:-7px;" class="switch">
+                        {{#if details.annual_monthly}}
+
+                        
+                           <input data-action="annual_monthly" class="action actionmonthlyannual" type="checkbox" checked>
+                        
+
+                           
+                           {{else}}
+                              
+                              <input  data-action="annual_monthly" class="action actionmonthlyannual" type="checkbox">
+                        
+                           
+                           {{/if}}
+                     
+                        <span class="slider round"></span>
+                     </label>
+                  </p>
+               </td>
+               <td><p>Annual</p></td>
+            </tr> --}}
+         </table>
+
+         {{!-- <span><b>Offer Both Monthly & Annual</b></span>
+
+         <table>
+            <tr>
+               <td><p>Off</p></td>
+               <td>  
+                  <p>
+                     <label style="margin-top:-7px;" class="switch">
+                        {{#if details.offer_monthly_and_annual}}
+                        <input data-action="offer_monthly_and_annual" class="action" type="checkbox" checked>
+                        {{else}}
+                        <input data-action="offer_monthly_and_annual" class="action" type="checkbox">
+                        {{/if}}
+                        <span class="slider round"></span>
+                     </label>
+                  </p>
+               </td>
+               <td><p>On</p></td>
+            </tr>
+         </table> --}}
+      </div>
+
+      <div class="settings-bot-box box-shadow-con">
+         <div>
+            <div class="Polaris-Card">
+               <div class="Polaris-Card__Header">
+                  <h3 class="Polaris-Heading">Brand Settings</h3>
+               </div>
+               <div class="Polaris-Card__Section">
+                  <span><b>Offering Style</b></span>
+                  <p>
+                     <select class="style-change">
+                        {{#ifEquals details.offering_type 1}}
+                           <option selected value="1">Buttons</option>
+                           {{else}}
+                           <option value="1">Buttons</option>
+                           {{/ifEquals}}
+
+                           {{#ifEquals details.offering_type 2}}
+                           <option selected value="2">Radio buttons</option>
+                           {{else}}
+                           <option value="2">Radio buttons</option>
+                           {{/ifEquals}}
+                     </select>
+                  </p>
+                  <span><b>Current Font</b></span>
+                  <p>
+                     <select class="font-selector">
+                        {{#ifEquals details.font_family "Arial"}}
+                        <option selected value="Arial">Arial</option>
+                        {{else}}
+                        <option value="Arial">Arial</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Verdana"}}
+                        <option selected value="Verdana">Verdana</option>
+                        {{else}}
+                        <option value="Verdana">Verdana</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Hind"}}
+                        <option selected value="Hind">Hind</option>
+                        {{else}}
+                        <option value="Hind">Hind</option>
+                        {{/ifEquals}}
+                     
+
+                        {{#ifEquals details.font_family "Helvetica"}}
+                        <option selected value="Helvetica">Helvetica</option>
+                        {{else}}
+                        <option value="Helvetica">Helvetica</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Times"}}
+                        <option selected value="Times">Times</option>
+                        {{else}}
+                        <option value="Times">Times</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Tahoma"}}
+                        <option selected value="Tahoma">Tahoma</option>
+                        {{else}}
+                        <option value="Tahoma">Tahoma</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Georgia"}}
+                        <option selected value="Georgia">Georgia</option>
+                        {{else}}
+                        <option value="Georgia">Georgia</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Garamond"}}
+                        <option selected value="Garamond">Garamond</option>
+                        {{else}}
+                        <option value="Garamond">Garamond</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Comic Sans MS"}}
+                        <option selected value="Comic Sans MS">Comic Sans MS</option>
+                        {{else}}
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Avant Garde"}}
+                        <option selected value="Avant Garde">Avant Garde</option>
+                        {{else}}
+                        <option value="Avant Garde">Avant Garde</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Trebuchet MS"}}
+                        <option selected value="Trebuchet MS">Trebuchet MS</option>
+                        {{else}}
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        {{/ifEquals}}
+
+                        {{#ifEquals details.font_family "Times New Roman"}}
+                        <option selected value="Times New Roman">Times New Roman</option>
+                        {{else}}
+                        <option value="Times New Roman">Times New Roman</option>
+                        {{/ifEquals}}
+                     </select>
+                  </p>
+
+                     {{#ifEquals details.offering_type 1}}
+                        <div  class="offering1options">
+                     <label style="font-size: 16px;">Current Color</label>
+                     
+                     <div style="margin-top:10px">
+                  <div>
+                     <input style="width:100%;" class="color-selector" value="{{details.color}}" type="color" >
+                     
+                     </div>
+
+                     </div>
+                     
+               
+                  <div style="margin-top:19px;" class="">
+                  <label>Corner Style</label>
+                  
+                     <div class="Polaris-RangeSlider-SingleThumb" style="--Polaris-RangeSlider-min:0; --Polaris-RangeSlider-max:30; --Polaris-RangeSlider-current:4; --Polaris-RangeSlider-progress:13.3333%; --Polaris-RangeSlider-output-factor:0.366667;">
+                        <div><input style="width:100%;" type="range" class="range-selector" min="0" value="{{details.border_px}}" max="30" step="1" aria-valuemin="0" aria-valuemax="30" aria-invalid="false"></div>
+                        <div class="Polaris-RangeSlider-SingleThumb__Suffix">
+                        </div>
+                     </div>
+                  </div>
+
+ <br />
+                    <div class="">
+                  <label>Selected Border Width</label>
+                  
+                     <div class="Polaris-RangeSlider-SingleThumb" style="--Polaris-RangeSlider-min:0; --Polaris-RangeSlider-max:30; --Polaris-RangeSlider-current:4; --Polaris-RangeSlider-progress:13.3333%; --Polaris-RangeSlider-output-factor:0.366667;">
+                        <div><input style="width:100%;" type="range" class="range-selector-width" min="0" value="{{details.border_selected_px}}" max="30" step="1" aria-valuemin="0" aria-valuemax="30" aria-invalid="false"></div>
+                        <div class="Polaris-RangeSlider-SingleThumb__Suffix">
+                        </div>
+                     </div>
+                  </div>
+
+                  </div>
+                        {{else}}
+                        <div style="display:none" class="offering1options">
+                     <label style="font-size: 16px;">Current Color</label>
+                     
+                     <div style="margin-top:10px">
+                  <div>
+                     <input style="width:100%;" class="color-selector" value="{{details.color}}" type="color" >
+                     
+                     </div>
+
+                     </div>
+                     
+                
+                  <div class="">
+                  <label>Corner Style</label>
+                  
+                     <div class="Polaris-RangeSlider-SingleThumb" style="--Polaris-RangeSlider-min:0; --Polaris-RangeSlider-max:30; --Polaris-RangeSlider-current:4; --Polaris-RangeSlider-progress:13.3333%; --Polaris-RangeSlider-output-factor:0.366667;">
+                        <div><input style="width:100%;" type="range" class="range-selector" min="0" value="{{details.border_px}}" max="30" step="1" aria-valuemin="0" aria-valuemax="30" aria-invalid="false"></div>
+                        <div class="Polaris-RangeSlider-SingleThumb__Suffix">
+                        </div>
+                     </div>
+                  </div>
+
+<br />
+                    <div class="">
+                  <label>Selected Border Width</label>
+                  
+                     <div class="Polaris-RangeSlider-SingleThumb" style="--Polaris-RangeSlider-min:0; --Polaris-RangeSlider-max:30; --Polaris-RangeSlider-current:4; --Polaris-RangeSlider-progress:13.3333%; --Polaris-RangeSlider-output-factor:0.366667;">
+                        <div><input style="width:100%;" type="range" class="range-selector-width" min="0" value="{{details.border_selected_px}}" max="30" step="1" aria-valuemin="0" aria-valuemax="30" aria-invalid="false"></div>
+                        <div class="Polaris-RangeSlider-SingleThumb__Suffix">
+                        </div>
+                     </div>
+                  </div>
+
+                  </div>
+                        {{/ifEquals}}
+
+           
+                       
+
+
+
+                  
+                  <br>
+               </div>
+
+               {{#ifEquals details.offering_type 1}}
+               <div class="cps_cart radiobuttons">
+                  <div class="caption">
+                     <div style="font-size: 13px; margin-right:80px; float:left;  color: black; margin-bottom:20px; font-family: {{details.font_family}};" class="caption-text">Add an extended warranty from <span style="color:black;"><img style="width:65px; vertical-align:middle; margin-left:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png"><a style="vertical-align:middle" target="_blank" href="https://www.cpscentral.com/warranty-coverage.aspx?type=EX"><img style="margin-left:5px; height:12px; margin-bottom:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px"></a></span></div>
+                  </div>
+                  <div class="button-group">
+                     <button style="border-radius:{{details.border_px}}px; border:{{details.border_selected_px}}px solid  #808080; !important; background-color:{{details.color}}; !important; color: white !important;" warranty-attr="37285763285146" class="btn-warranty2 button-warranty-range-width button-warranty btn-offer" type="button">
+                        <div><span style="font-family:{{details.font_family}};" class="term-length"> <strong>1  Year</strong></span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700 " class="price-amt">57.99</span></span></div>
+                     </button>
+                     <button style="border-radius:{{details.border_px}}px;" warranty-attr="37285763645594" class="btn-warranty2 button-warranty btn-offer" type="button">
+                        <div><span style="font-family:{{details.font_family}}" class="term-length"><strong>2  Years</strong> </span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700" class="price-amt">69.99</span></span></div>
+                     </button>
+                  </div>
+                  <style>
+                     .selected{
+                     box-shadow: 0 0 0 1px inset {{details.color}};;
+                     border-radius: 4px;
+                     border-color: {{details.color}};;
+                     background-color: {{details.color}};
+                     color: #fff;
+                     font-family: 'Nunito Sans', Helvetica, sans-serif;
+                     border: 1px solid {{details.color}};;
+                     border-radius: 4px;
+                     cursor: pointer;
+                     }
+                     .button-warranty {
+                     background: white;
+                     border: 1px solid #b2bcc3;
+                     border-radius: 4px;
+                     color: black;
+                     cursor: pointer;
+                     font-family: 'Nunito Sans', Helvetica, sans-serif;
+                     }
+                     @media (hover) {
+                     .button-warranty:hover {
+                  
+                     }
+                     }
+                  </style>
+                  <style>
+                     /* component styles */
+                     .caption {
+                     display: inline-block;
+                     overflow: wrap;
+                     font-size: 1.4rem;
+                     margin-bottom: -10px;
+                     align-items: baseline;
+                     }
+                     .caption-text {
+                     display: inline-block;
+                     white-space: nowrap;
+                     }
+                     .info-button {
+                     margin: 0;
+                     border: 0;
+                     font-family: 'Nunito Sans', Helvetica, sans-serif;
+                     font-size: 1.4rem;
+                     color: {{details.color}};
+                     cursor: pointer;
+                     padding: 0;
+                     background-color: transparent;
+                     }
+                     .info-link {
+                     display: inline-block;
+                     text-decoration: underline;
+                     }
+                     .info-icon {
+                     display: none;
+                     }
+                     .info-icon g {
+                     fill: {{details.color}};;
+                     }
+                     .btn-offer {
+                     padding: 0.8rem;
+                     text-align: center;
+                     }
+                     .btn-offer:focus {
+                     outline:none;
+                     }
+                     .button-group {
+                     display: flex;
+                     }
+                     .button-group > .btn-offer {
+                     flex: 0.27;
+                     }
+                     .btn-offer + .btn-offer {
+                     margin-left: 1rem;
+                     }
+                     .divider {
+                     display: inline-block;
+                     }
+                     @media (max-width: 450px) {
+                        .info-icon {
+                        display: none;
+                        }
+                        .info-link {
+                        display: inline-block;
+                        }
+                     }
+                     @media (max-width: 450px) {
+                        .info-icon {
+                        display: inline-block;
+                        }
+                        .info-link {
+                        display: none;
+                        }
+                        .term-length,
+                        .plan-price {
+                        display: block;
+                        }
+                        .term-length,
+                        .price-currency-sym {
+                        font-size: 16px;
+                        }
+                        .divider {
+                        display: none;
+                        }
+                        .term-length {
+                        margin-bottom: .1rem;
+                        font-size:16px;
+                        }
+                        .price-currency-sym {
+                        margin-right: 0.1rem;
+                        position: relative;
+                        top: -0.1rem;
+                        }
+                        .btn-offer {
+                        padding: 0.75rem;
+                        }
+                     }
+                     @media (min-width: 200px) {
+                        .caption {
+                        font-size: 1.2rem;
+                        font-weight:bold;
+                        }
+                     }
+                     @media (max-width: 200px) {
+                        .caption {
+                        font-size: 1.1rem;
+                        line-height: 1.4rem;
+                        }
+                        .logo {
+                        height: 0.8rem;
+                        margin: 0 0.3rem;
+                        }
+                        .info-icon {
+                        height: 0.8rem;
+                        }
+                        .btn-offer {
+                        font-size: 1rem;
+                        }
+                        .price-currency-sym {
+                        margin-right: 0.1rem;
+                        position: relative;
+                        top: -0.05rem;
+                        }
+                     }
+                  </style>
+               </div>
+            </div>
+         </div>
+         {{else}}
+         <div style="display:none" class="cps_cart radiobuttons">
+            <br>
+            <div class="caption">
+               <div style="font-size: 13px; margin-right:80px; float:left; font-family:; color: black; margin-bottom:20px;  font-family: {{details.font_family}};" class="caption-text">Add an extended warranty from <span style="color:black;"><img style="width:65px; vertical-align:middle; margin-left:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png"><a style="vertical-align:middle" target="_blank" href="https://www.cpscentral.com/warranty-coverage.aspx?type=EX"><img style="margin-left:5px; height:12px; margin-bottom:5px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px"></a></span></div>
+            </div>
+            <div class="button-group">
+               <button style="border-radius:{{details.border_px}}px; border:{{details.border_selected_px}}px solid  #808080; !important; background-color:{{details.color}}; !important; color: white !important;" warranty-attr="37285763285146" class="btn-warranty2 button-warranty-range-width button-warranty btn-offer" type="button">
+                  <div><span style="font-family:{{details.font_family}};" class="term-length"> 1  Year</span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700 " class="price-amt">57.99</span></span></div>
+               </button>
+               <button style="border-radius:{{details.border_px}}px;" warranty-attr="37285763645594" class="btn-warranty2 button-warranty btn-offer" type="button">
+                  <div><span style="font-family:{{details.font_family}}" class="term-length">2  Years </span><span class="divider"></span><span style="font-family:{{details.font_family}}" class="plan-price"><span class="price-currency-sym">$</span><span style="font-size:14px; font-weight:700 " class="price-amt">69.99</span></span></div>
+               </button>
+            </div>
+            <style>
+               .selected{
+               box-shadow: 0 0 0 1px inset {{details.color}};;
+               border-radius: 4px;
+               border-color: {{details.color}};;
+               background-color: {{details.color}};;
+               color: #fff;
+               font-family: 'Nunito Sans', Helvetica, sans-serif;
+               border: 1px solid {{details.color}};;
+               border-radius: 4px;
+               cursor: pointer;
+               }
+               .button-warranty {
+               background: white;
+               border: 1px solid #b2bcc3;
+               border-radius: 4px;
+               color: black;
+               cursor: pointer;
+               font-family: 'Nunito Sans', Helvetica, sans-serif;
+               }
+               @media (hover) {
+                  .button-warranty:hover {
+                  }
+               }
+            </style>
+            <style>
+               /* component styles */
+               .caption {
+               display: inline-block;
+               overflow: wrap;
+               font-size: 1.4rem;
+               margin-bottom: -10px;
+               align-items: baseline;
+               }
+               .caption-text {
+               display: inline-block;
+               white-space: nowrap;
+               }
+               .info-button {
+               margin: 0;
+               border: 0;
+               font-family: 'Nunito Sans', Helvetica, sans-serif;
+               font-size: 1.4rem;
+               color: {{details.color}};;
+               cursor: pointer;
+               padding: 0;
+               background-color: transparent;
+               }
+               .info-link {
+               display: inline-block;
+               text-decoration: underline;
+               }
+               .info-icon {
+               display: none;
+               }
+               .info-icon g {
+               fill: {{details.color}};;
+               }
+               .btn-offer {
+               padding: 0.8rem;
+               text-align: center;
+               }
+               .btn-offer:focus {
+               outline:none;
+               }
+               .button-group {
+               display: flex;
+               }
+               .button-group > .btn-offer {
+               flex: 0.25;
+               }
+               .btn-offer + .btn-offer {
+               margin-left: 1rem;
+               }
+               .divider {
+               display: inline-block;
+               }
+               @media (max-width: 450px) {
+                  .info-icon {
+                  display: none;
+                  }
+                  .info-link {
+                  display: inline-block;
+                  }
+               }
+               @media (max-width: 450px) {
+                  .info-icon {
+                  display: inline-block;
+                  }
+                  .info-link {
+                  display: none;
+                  }
+                  .term-length,
+                  .plan-price {
+                  display: block;
+                  }
+                  .term-length,
+                  .price-currency-sym {
+                  font-size: 16px;
+                  }
+                  .divider {
+                  display: none;
+                  }
+                  .term-length {
+                  margin-bottom: .1rem;
+                  font-size:16px;
+                  }
+                  .price-currency-sym {
+                  margin-right: 0.1rem;
+                  position: relative;
+                  top: -0.1rem;
+                  }
+                  .btn-offer {
+                  padding: 0.75rem;
+                  }
+               }
+               @media (min-width: 200px) {
+                  .caption {
+                  font-size: 1.2rem;
+                  font-weight:bold;
+                  }
+               }
+               @media (max-width: 200px) {
+                  .caption {
+                  font-size: 1.1rem;
+                  line-height: 1.4rem;
+                  }
+                  .logo {
+                  height: 0.8rem;
+                  margin: 0 0.3rem;
+                  }
+                  .info-icon {
+                  height: 0.8rem;
+                  }
+                  .btn-offer {
+                  font-size: 1rem;
+                  }
+                  .price-currency-sym {
+                  margin-right: 0.1rem;
+                  position: relative;
+                  top: -0.05rem;
+                  }
+               }
+            </style>
+         </div>
+      </div>
+
+   </div>
+
+     {{/ifEquals}}
+
+                  
+      
+
+      {{#ifEquals details.offering_type 2}}
+                  <div class="dropdown">
+   <div id="cps_cart">
+      <div class="dropdown-text" style="font-size: 13px; color: black;">
+         <strong>Add Accidental protection from</strong> <span style=color:"black">
+         <img style="width:65px; vertical-align:middle; margin-top: 8px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png" 
+         id="gsslider13" />
+         <img style="margin-left:5px; height:12px; margin-top:10px; vertical-align:top;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px" id="gsslider14" /></span></div>
+            
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 2 Years of Warranty Protection for $22.99</label> 
+         </p>
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 3 Years of Warranty Protection for $32.99 </label> 
+         </p>
+   </div>
+      </div>
+
+                  {{else}}
+                  <div style="display:none" class="dropdown">
+   <div id="cps_cart">
+      <div class="dropdown-text" style="font-size: 13px; color: black;">
+         <strong>Add Accidental protection from</strong> <span style=color:"black">
+         <img style="width:65px; vertical-align:middle; margin-top: 8px;" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png" 
+         id="gsslider13" />
+         <img style="margin-left:5px; height:12px; margin-top:10px; vertical-align:top;" src="https://s3.amazonaws.com/cdn.cpscentral.com/icons8-info-24.png" height="12px" id="gsslider14" /></span></div>
+            
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 2 Years of Warranty Protection for $22.99</label> 
+         </p>
+         <p class="radio-p">
+            <input type="radio" name="cps" style="margin-bottom:7px;" value="34321117380745" /> 
+            <label class="dropdown-text" style="font-family: {{details.font_family}}; font-size:12px"> Include 3 Years of Warranty Protection for $32.99 </label> 
+         </p>
+   </div>
+   </div>
+                  {{/ifEquals}}
+
+<br />
+   <p style="display:none;" class="button save-changes">Update</p>
+<p style="display:none;" class="updated-text">Succesfully Updated</p>
+
+
+<div id="modalMain" class="warrantymodal modal">
+
+		  <!-- Modal content -->
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <span class="close">&times;</span>
+		      <p>Add to your order</p>
+		    </div>
+		    <div class="modal-body">
+              <div class="modal-bodycps">
+		      <div style="height:25%;border:{{details.border_selected_px}}px solid  #808080;" class="plan-img button-warranty-range-width" >
+<div style="padding: 5px 2px 2px 7px">
+                <h4 style="font-size:14px;margin:0;font-family:{{details.font_family}}" class="caption-text2">1 Year <strong>Protection Plan</strong></h4>
+                <img style="width:50%; margin-top:-9px" src="https://s3.amazonaws.com/cdn.cpscentral.com/images/cps-logo-color+(2).png" />
+</div>
+            </div>
+		      <div class="modal-top">
+		      	<div class="modal-top-l">
+			      	<p style="font-family: {{details.font_family}}"; class="title caption-text">1 Year Protection Plan</p>
+			      	<p class="caption-text" style="font-family: {{details.font_family}}">from Consumer Priority Service</p>
+			      
+			      	<p class="caption-text2" style="font-family: {{details.font_family}}">$29.99</p>
+		      	</div>
+		      	<div  style="font-family: {{details.font_family}}" class="modal-top-r">
+		      		<button class="caption-text2 modal-btn purple-btn">Add</button>
+		      		<button class="caption-text2 modal-btn">No Thanks</button>
+		      	</div>
+		      </div>
+		      <div class="modal-bot">
+		      	<ul class="caption-text" style="font-family: {{details.font_family}};">
+				     <li>100% Parts and Labor Coverage</li>
+                        <li>Includes Accidental Damage</li>
+                        <li>Includes Free Shipping</li>
+				</ul> 
+		      </div>
+		    </div>
+		  </div>
+
+		</div>
+	</body>
+</html>
+
+<script>
+	// Get the modal
+	var modal = document.getElementById("modalMain");
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("warrantyModal-btn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+</script>
+
+
+<style>
+
+	html,body {
+		box-sizing: border-box;
+		font-size: 15px;
+		font-weight: 400;
+ 		font-family: 'Montserrat', sans-serif;
+ 		color: #000000;
+	}
+
+	button {
+ 		font-family: 'Montserrat', sans-serif;
+	}
+
+	p.modal-btn {
+		position: absolute;
+		top:40%;
+		width: 100%;
+		text-align: center;
+		font-size: 32px;
+		cursor: pointer;
+	}
+
+	p {
+		margin-top: 0;
+	}
+
+	img {
+		max-height: 100%;
+		max-width: 100%;
+	}
+	/* The Modal (background) */
+	.modal {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 1; /* Sit on top */
+	  padding-top: 100px; /* Location of the box */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content */
+	.modal-content {
+	  position: relative;
+	  background-color: #fefefe;
+	  margin: auto;
+	  padding: 0;
+	  border-radius: 5px;
+	  border: 1px solid #888;
+	  width: calc(100% - 20px);
+      max-width: 770px;
+	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	  -webkit-animation-name: animatetop;
+	  -webkit-animation-duration: 0.4s;
+	  animation-name: animatetop;
+	  animation-duration: 0.4s
+	}
+
+	/* Add Animation */
+	@-webkit-keyframes animatetop {
+	  from {top:-300px; opacity:0} 
+	  to {top:0; opacity:1}
+	}
+
+	@keyframes animatetop {
+	  from {top:-300px; opacity:0}
+	  to {top:0; opacity:1}
+	}
+
+	/* The Close Button */
+	.close {
+	    font-size: 45px;
+	    font-weight: 300;
+	    cursor: pointer;
+	    position: absolute;
+	    height: 29px;
+	    line-height: 36px;
+	    top: 9px;
+    	right: 9px;
+	    transition-duration: 250ms;
+	    color: #7b889f;
+	    border: 1px solid #ffffff;
+	    width: 36px;
+	    height: 36px;
+	}
+	.close:hover {
+		border: 1px solid #3d405c;
+		color:#3d405c;
+	}
+
+	.modal-header {
+	  padding: 18px 16px;
+	  position: relative;
+	  text-align: center;
+	  border-bottom: 1px solid #e7e7e7;
+	}
+
+	.modal-header p {
+		font-size: 16px;
+		font-weight: 500;
+		color: #7b889f;
+		margin: 0;
+	}
+
+	.modal-body {
+		padding: 40px 40px 40px 180px;
+		position: relative;
+	}
+
+	.warrantymodal .plan-img {
+		width:100px;
+		position: absolute;
+		top: 40px;
+		left: 50px;
+	}
+
+	.modal-top-l p {
+		font-size: 14px;
+	    margin-bottom: 5px;
+	    font-weight: 500;
+	    vertical-align: top;
+	}
+
+	.modal-top-l .title {
+		font-weight: 700;
+		font-size: 18px;
+	}
+
+	.modal-top-l, .modal-top-r {
+		display: inline-block;
+	}
+
+	.modal-top-r {
+		width: 220px;
+	}
+
+	.modal-top-l {
+		width: calc(100% - 231px);
+	}
+
+	.modal-top-r button {
+	    width: 100%;
+	    font-size: 16px;
+	    padding: 7px;
+	    font-weight: 600;
+	    margin-bottom: 10px;
+	    border: 1px solid #999999;
+	    background-color: #ffffff;
+	    border-radius: 3px;
+	    color: #000000;
+	    cursor: pointer;
+		transition-duration: 250ms;
+	}
+
+	.modal-top-r button:hover {
+		color: #999999;
+	}
+
+	.modal-top-r button.purple-btn {
+		color: #ffffff;
+		background-color: rgb(125, 44, 255);
+		border-color: rgb(125, 44, 255);
+		font-weight: 500;
+	}
+
+	.modal-top-r button.purple-btn:hover {
+		background-color: #4e5bf2;
+	    border-color: #4250f2;
+	}
+
+	.modal-bot li {
+		font-size: 14px;
+		line-height: 22px;
+		letter-spacing: 1px;
+		width: 370px;
+		max-width: 100%;
+		margin-bottom: 5px;
+	}
+
+	.modal-bot ul {
+		padding-left: 15px;
+		padding-bottom: 20px;
+	}
+
+	.rating-stars {
+		margin-bottom: 10px;
+		position: relative;
+	}
+	.rating-stars .rating-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+	}
+	.rating-stars .rating-front {
+		position: relative;
+		z-index: 2;
+	}
+
+	.rating-stars span {
+		color:#e7e7e7;
+	}
+
+	.rating-stars span.checked {
+	  color: #727cf5;
+	}
+
+	.rating-stars .rating-number {
+		color: #000000;
+		margin-left: 7px;
+		font-weight: 500;
+	}
+
+</style>
+
+
+
+{{> footer}}
+
+
+<style>
+
+     .button {
+        display: inline-block;
+        cursor: pointer;
+        color:#ffffff;
+        border-radius:  5px;
+        padding: 8px 15px;
+        background-color: #737DF6;
+        text-decoration: none;
+    }
+    .button:hover {
+        transition-duration: 250ms;
+        opacity: 0.8;
+    }
+   .settings-main {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: block;
+      padding-bottom: 50px;
+   }
+   .settings-bot {
+      display: inline-flex;
+      justify-content: space-between;
+      width: 100%;
+   }
+   .settings-bot .settings-bot-box {
+      width: 100%;
+      max-width: calc(33% - 65px);
+      padding: 25px 25px 15px 25px;
+      background-color: #ffffff;
+   }
+   .settings-top {
+      margin-bottom: 20px;
+      padding: 5px 25px 15px 25px;
+      background-color: #ffffff;
+   }
+   h3 {
+      margin-top: 0;
+      margin-bottom: 23px;
+   }
+   
+   .settings-bot td p {
+      margin: 14px 0;
+   }
+
+   .settings-bot table {
+      margin-bottom: 20px;
+   }
+
+   .settings-bot select {
+      color: #000000;
+      font-weight: 500;
+      width: 100%;
+      height: 33px;
+      outline: none;
+      font-family: inherit;
+      padding: 5px 5px 5px 10px;
+      border-radius: 3px;
+      border: 1px solid #e7e7e7;
+      transition-duration: 350ms;
+      margin-bottom: 15px;
+      cursor: pointer;
+   }
+   .settings-bot select:active, .settings-bot select:focus, .settings-bot select:hover {
+      border-color: #66afe9;
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+      box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+   }
+
+   ..settings-bot select:disabled {
+      color: #ccc;
+   }
+
+   .Polaris-Card p {
+      position: relative;
+   }
+
+   .settings-main .breadcrumbs u {
+      cursor: pointer;
+      font-weight: 500;
+   }
+   .settings-main .breadcrumbs span {
+      float: right;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition-duration: 350ms;
+      opacity: 0.7;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 5px 0 0 5px;
+      border-right: 0;
+   }
+   .settings-main .breadcrumbs span:hover {
+      opacity: 1;
+   }
+   .settings-main .breadcrumbs span.purple-txt {
+      border-radius: 0 5px 5px 0;
+      border-right: 1px solid #ccc;
+      color:#7578FD;
+   }
+   .settings-flex {
+      display: inline-flex;
+      width: 100%;
+   }
+   .settings-flex img {
+      max-width: 100%;
+      max-height: 600px;
+   }
+   .settings-top-l, .settings-top-r {
+      position: relative;
+   }
+   .settings-top-l {
+      width: calc(100% - 450px);
+      min-width: 50%;
+   }
+   .settings-top-r {
+      width: 450px;
+      max-width: 50%;
+   }
+   .settings-top-r b {
+      font-weight: 800;
+      font-size: 15px;
+   }
+   .settings-top-r p {
+      margin: 7px 0;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+   }
+   .settings-top-r .desc-title {
+      margin-top: 35px;
+   }
+   .settings-img-con {
+      text-align: center;
+   }
+   .settings-top-l .condition-tag {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #65D1D1;
+      font-weight: 600;
+      border-radius: 4px;
+      padding:9px 20px 8px;
+      cursor: pointer;
+   }
+   .red-txt {
+      color: #FA0349;
+   }
+   .settings-top-r .sm-txt {
+      margin-top: 20px;
+      font-size: 12px;
+      letter-spacing: 0;
+      padding-right: 80px;
+      display: inline-block;
+      position: relative;
+      font-weight: 600;
+   }
+   .settings-top-r .sm-txt img {
+      position: absolute;
+      right: 0;
+      top: -2px;
+      width: 78px;
+      cursor: help;
+   }
+   .warranty-btns {
+      padding: 5px 0 25px;
+   }
+   .warranty-btns .warranty-btn {
+      border-radius: 5px;
+      border: 2px solid #ccc;
+      letter-spacing: 0;
+      padding: 7px 8px;
+      text-align: center;
+      width: 85px;
+      cursor: pointer;
+      margin-right: 10px;
+      line-height: 23px;
+      transition-duration: 350ms;
+      display: inline-block;
+   }
+   .warranty-btn b {
+      font-weight: 500;
+      font-size: 20px;
+   }
+   .warranty-btns .warranty-btn.purple-bg, .warranty-btns .warranty-btn:hover {
+      color: #ffffff;
+      background-color: #7578FD;
+   }
+   .settings-top-r .social-icons {
+      padding: 35px 0 20px;
+   }
+   .settings-top-r .social-icons .fab  {
+      font-size: 19px;
+      height: 19px;
+      width: 19px;
+      cursor: pointer;
+   }
+   .settings-top-r .social-icons span {
+      background-color: #000000;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      display: inline-flex;
+      margin-right: 35px;
+      height: 30px;
+      width: 30px;
+      justify-content: center;
+      align-items: center;
+      transition-duration: 350ms;
+   }
+   .settings-top-r .social-icons span:hover {
+      background-color: #ffffff;
+      color: #000000;
+   }
+
+
+</style>

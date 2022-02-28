@@ -1,0 +1,209 @@
+{{> header}}
+
+
+
+<div class="faq-main">
+    <div class="faq-con">
+
+        <p class="title">Initial Setup:</p>
+        <button class="accordion">User Guides</button>
+        <div class="panel">
+            <p>
+                <a class="pdf-link" target="_blank" href="https://s3.amazonaws.com/cdn.cpscentral.com/files/CPS+Customer+Journey+BigCommerce+(2).pdf">CPS Customer Journey <span>PDF</span></a>
+            </p>
+        </div>
+        <button class="accordion">I just installed the CPS Extended Warranty Upsell App, what do I do next?</button>
+        <div class="panel">
+            <p>Congratulations on installing the CPS Extended Warranty Upsell app! Step 1 is to head to the Settings page to update the look of the warranty offering to match the look and feel of your store.</p>
+        </div>
+        <button class="accordion">When will the warranty offering be live on my product pages?</button>
+        <div class="panel">
+            <p>After the app is installed, our bot will map your product categories to the available CPS warranty plans.Over the course of 24 hours, our app will take care of the heavy lifting:</p>
+            <ul>
+                <li>A new category will be added where the warranties will be stored- Consumer Priority Service</li>
+                <li>You’ll receive a confirmation email as soon as this process is complete.</li>
+            </ul>
+        </div>
+        
+        <button class="accordion">Can I change the retail price of the warranties?</button>
+        <div class="panel panel-last">
+            <p>Absolutely! Via the "Pricing" page, feel free to click the "Edit" button to update your retail price.The default price will be set to MSRP, which includes 100% profit.</p>
+        </div>
+        <p class="title">General Questions:</p>
+        <button class="accordion">What kinds of products do CPS warranties cover?</button>
+        <div class="panel">
+            <p>CPS provides coverage for over 60 categories of products including electronics, appliances, furniture, jewelry, luggage, patio furniture, musical instruments, etc.</p>
+        </div>
+        <button class="accordion">What types of warranty coverage does CPS provide?</button>
+        <div class="panel">
+            <p>Based on the category, CPS provides Extended Warranties that mirror the original OEM warranty, Accidental Warranties that provide coverage from drops and spills, In-Home warranties for Appliances and TVs, and replacement warranties for lower-cost products.</p>
+        </div>
+        <button class="accordion">How does a customer purchase a CPS warranty?</button>
+        <div class="panel">
+            <p>Once the CPS Warranty app is installed, and your products are mapped, the warranty offering will automatically be added to your product&rsquo;s page on BigCommerce. The customer simply adds the warranty to the cart with the product and checks out.</p>
+        </div>
+        <button class="accordion">How do I notify CPS that a customer purchased a warranty?</button>
+        <div class="panel">
+            <p>The app takes care of that for you!Our bot listens to the orders placed through your BigCommerce store and submits a warranty order to CPS via API.</p>
+        </div>
+        <button class="accordion">How does CPS send the warranty information to the customer?</button>
+        <div class="panel">
+            <p>Once the order is processed and paid for successfully, the app will submit the warranty order with CPS. CPS will immediately email the customer with their warranty information.</p>
+        </div>
+        <button class="accordion">How do I pay for the CPS warranties I have sold?</button>
+        <div class="panel">
+            <p>Warranty orders are on NET 30 payment terms. CPS Accounting will send you a monthly statement to remit payment.Please feel free to contact CPS Accounting via email at <a href="mailto:accounting@cpscentral.com"> accounting@cpscentral.com</a> or toll-free by calling 800-905-0445.</p>
+        </div>
+        <button class="accordion">How can the customer register their warranty?</button>
+        <div class="panel">
+            <p>Customers can visit&nbsp;<a href="http://www.cpscentral.com">www.cpscentral.com</a>&nbsp;to register their plan, using their warranty #. They can also call CPS Customer Experience at 800-905-0443 to complete registration or email&nbsp;<a href="mailto:cs@cpscentral.com">cs@cpscentral.com</a>.</p>
+        </div>
+        <button class="accordion">How does the customer file a claim?</button>
+        <div class="panel panel-last">
+            <p>Customers can simply file a claim by logging in to their CPS account at&nbsp;<a href="http://client.cpscentral.com">client.cpscentral.com</a>.They can also call CPS Customer Experience at 800-905-0443 or email cs@cpscentral.com to file a claim.</p>
+        </div>
+        <p>Additional questions? Please feel free to contact our Merchant Support team via email at <a href="mailto:dealers@cpscentral.com">dealers@cpscentral.com</a> or toll-free by calling 800-905-0445.</p>
+    </div>
+</div>
+
+<style>
+    html, body{
+        box-sizing: border-box;
+        font-size: 15px;
+        font-family:Montserrat,sans-serif;
+        color:#000000;
+        background-color:#f9fafb;
+        font-weight:500;
+    }
+
+    p {
+        line-height: 23px;
+        margin: 10px 0;
+    }
+    a {
+        text-decoration: none;
+        color: #7578FD;
+        opacity: 0.7;
+        display: inline-block;
+        transition-duration: 0.5s;
+        margin: 0;
+        font-weight: 500;
+    }
+    a:hover {
+        opacity: 1;
+    }
+    .faq-main {
+        padding: 10px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .faq-con {
+        padding: 25px 35px;
+        background-color:#ffffff;
+        box-shadow: 0 0 10px 0 rgb(183 192 206 / 20%);
+        -webkit-box-shadow: 0 0 10px 0 rgb(183 192 206 / 20%);
+        border: 1px solid #f2f4f9;
+    }
+   .pdf-link span {
+       color: #C11E07;
+       border: 1px solid #C11E07;
+       border-radius: 2px;
+       padding: 1px 3px 0;
+       margin-left: 5px;
+       display: inline-block;
+       font-size: 10px;
+       transition-duration: 0.5s;
+       line-height: 17px;
+   }
+
+   .pdf-link:hover span {
+       color: #ffffff;
+       background-color: #C11E07;
+   }
+
+   .title {
+       text-transform: uppercase;
+       font-size: 18px;
+       font-weight: 600;
+       margin: 0 0 20px;
+   }
+
+    .accordion {
+        border: 1px solid #e9ecef !important;
+        background-color: #ffffff;
+        border-bottom: 0 !important;
+        color: #444;
+        cursor: pointer;
+        padding: 16px 20px 15px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.5s;
+        position: relative;
+    }
+
+    .accordion.active {
+        color: #5b66e6;
+        background-color: #f0f1ff;
+    }
+
+    .accordion:after {
+        font-size: 15px;
+        content: '\2513';
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        transition-duration: 0.5s;
+        transform: rotate(-45deg);
+    }
+
+    .accordion.active:after {
+        top: 15px;
+        transform: rotate(135deg);
+    }
+
+    .panel {
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        border-left: 1px solid #e9ecef !important;
+        border-right: 1px solid #e9ecef !important;
+    }
+    .panel p , .panel ul{
+        padding: 8px 20px;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+
+    .panel ul {
+        padding: 0 20px 10px 40px;
+        margin-top: 0;
+    }
+    .panel.panel-last {
+        border-bottom: 1px solid #e9ecef !important;
+        margin-bottom: 30px;
+    }
+</style>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        });
+    }
+</script>
+
+{{> footer}}

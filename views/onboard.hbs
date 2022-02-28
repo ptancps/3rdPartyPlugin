@@ -1,0 +1,127 @@
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&display=swap" rel="stylesheet">
+
+<style>
+    body{
+        font-family:Montserrat
+    }
+</style>
+<div style="margin: 0 5px; box-shadow: 0px 0px 10px rgba(0,0,0,0.2); padding: 20px; margin-top:50px;  width:65%; background-color: var(--p-surface, white);">
+    <p style="font-family:Montserrat;font-weight:800;">WELCOME ONBOARD</p>
+<form action="/onboard" method="post" class="form-horizontal">                    
+ 
+
+					<div class="row">
+
+                          <div class="col-sm-6">
+                              <br/>
+                                        <label for="cname">Company Name</label>
+                                        <input placeholder="Enter company Name" class="form-control" type="text" size="20" 
+                                            value="" 
+                                            name="cname" maxlength="50" />
+                                    </div>
+
+                                      <div class="col-sm-6 input-col">
+                                          <br/>
+                                        <label for="taxid">Tax ID</label>
+                                        <input placeholder="Enter tax ID" class="form-control" type="text" size="20" 
+                                            value="" 
+                                            name="taxid" maxlength="50" />
+                                    </div>
+
+
+                                   <div class="col-sm-6 input-col">
+                                       <br/>
+                                       <label for="fname">First Name</label>
+                                        <input placeholder="Enter first Name" class="form-control" type="text" size="20" 
+                                            value="{{firstname}}" 
+                                            name="fname" maxlength="50" />
+                                    </div>
+
+                                    <div class="col-sm-6 input-col">
+                                        <br/>
+                                        <label for="lname">Last Name</label>
+                                        <input placeholder="Enter last Name" class="form-control" type="text" size="20" 
+                                            value="{{lastname}}" 
+                                            name="lname" maxlength="50" />
+                                    </div>
+                                    
+
+                                    <div class="col-sm-6 input-col">
+                                         <br/>
+                                        <label for="email">Email</label>
+                                        <input placeholder="Enter email" class="form-control" type="text" size="20" 
+                                            value="{{email}}" 
+                                            name="email" maxlength="50" />
+                                    </div>
+
+                                  
+                                     <div class="col-sm-6 input-col">
+                                          <br/>
+                                        <label for="phone">Phone</label>
+                                        <input placeholder="Enter phone number" class="form-control" type="text" size="20" 
+                                            value="{{phone}}" 
+                                            name="phone" maxlength="50" />
+                                    </div>
+
+                                    
+                                  
+                                    <div class="col-sm-12 input-col">
+                                        <br/>
+                                        <label for="address1">Address</label>
+                                        <input placeholder="Enter address" class="form-control" type="text" size="20" 
+                                            value="{{address}}" 
+                                            name="address1" maxlength="50" />
+                                    </div>
+                              
+
+                                
+                                   
+                                    <div class="col-sm-4 input-col">
+                                        <br/>
+                                        <label for="city">City</label>
+                                        <input placeholder="Enter city" class="form-control" type="text" size="20" 
+                                            value="" 
+                                            name="city" maxlength="50" />
+                                    </div>
+                                
+
+                                
+                                    
+                                    <div class="col-sm-4 input-col">
+                                         <br/>
+                                        <label for="state">State</label>
+                                        <input placeholder="Enter state" class="form-control" type="text" size="20" 
+                                            value="" 
+                                            name="state" maxlength="50" />
+                                    </div>
+                                
+                             
+                                    
+                                    <div class="col-sm-4 input-col">
+                                         <br/>
+                                        <label for="zip">Zip</label>
+                                        <input placeholder="Enter zip code" class="form-control" type="text" size="20" 
+                                            value="" 
+                                            name="zip" maxlength="5" />
+                                    </div>
+                                
+                           
+                              
+                                
+					</div>
+
+                            
+                            <br />
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div>                      
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                        
+                        
+                    </form>
+                    </div>

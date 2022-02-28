@@ -1,0 +1,1321 @@
+{{> header}}
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+   </script>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+   $(document).ready(function () {
+      $(".action").change(function () {
+         console.log($(this).val())
+
+         $(".basic").toggle()
+         $(".pro").toggle()
+      })
+   });
+
+ 
+  var appUrl ="{{appUrl}}"
+  var storeHash="{{storeHash}}"
+
+
+</script>
+
+<style>
+   .modal {
+	  display: none; /* Hidden by default */
+	  position: fixed; /* Stay in place */
+	  z-index: 99999; /* Sit on top */
+	  padding-top: 100px; /* Location of the box */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content */
+	.modal-content {
+	  position: relative;
+	  background-color: #fefefe;
+	  margin: auto;
+	  padding: 0;
+	  border-radius: 5px;
+	  border: 1px solid #888;
+	  width: calc(100% - 20px);
+      max-width: 770px;
+	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	  -webkit-animation-name: animatetop;
+	  -webkit-animation-duration: 0.4s;
+	  animation-name: animatetop;
+	  animation-duration: 0.4s
+	}
+
+	/* Add Animation */
+	@-webkit-keyframes animatetop {
+	  from {top:-300px; opacity:0} 
+	  to {top:0; opacity:1}
+	}
+
+	@keyframes animatetop {
+	  from {top:-300px; opacity:0}
+	  to {top:0; opacity:1}
+	}
+
+		/* The Close Button */
+	.modal-header .close {
+	    font-size: 45px;
+	    font-weight: 300;
+	    cursor: pointer;
+	    position: absolute;
+	    height: 29px;
+	    line-height: 36px;
+	    top: 9px;
+    	right: 9px;
+	    transition-duration: 250ms;
+	    color: #7b889f;
+	    border: 1px solid #ffffff;
+	    width: 36px;
+	    height: 36px;
+	}
+	.modal-header .close:hover {
+		border: 1px solid #3d405c;
+		color:#3d405c;
+	}
+
+	.modal-header {
+	  padding: 18px 16px;
+	  position: relative;
+	  text-align: center;
+	  border-bottom: 1px solid #e7e7e7;
+	}
+
+    .message-modal textarea {
+        padding: 20px;
+        margin: 20px 25px 0;
+        width: calc(100% - 91px);
+        height: 200px;
+        font-size: 16px;
+        resize: none;
+        border:1px solid #dadada;
+        outline: none !important;
+    }
+    .message-modal textarea:focus {
+        border:1px solid #cdcdcd;
+    }
+    
+
+    .message-modal button {
+        border-radius: 3px;
+        border: none;
+        padding: 7px;
+        text-align: center;
+        background-color: #e7e7e7;
+        font-weight: 600;
+        width: 70px;
+        cursor: pointer;
+    }
+
+    .message-modal button:hover {
+        transition-duration: 250ms;
+        opacity: 0.8;
+    }
+    
+    .message-modal button.purple-btn {
+        background-color: rgb(125, 44, 255);
+        color: #ffffff;
+        margin-right: 5px;
+    }
+
+    .message-modal .modal-header p {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .message-modal .modal-header .far {
+        margin-right: 5px;
+    }
+    .message-btns {
+        margin: 20px 25px 25px;
+    }
+
+
+
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6,
+   p,
+   svg,
+   div,
+   strong,
+   canvas {
+      background: transparent;
+   }
+
+   .welcome-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0em 1em;
+      clear:both;
+   }
+
+   .welcome-section .welcome-section-right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   }
+
+   .welcome-section .welcome-section-right input {
+      height: 100%;
+      border: none;
+      padding: 0.5em 1em;
+      margin: 0px 0 0 5px;
+      background: transparent;
+      color: rgb(125, 44, 255);
+   }
+   .welcome-section .welcome-section-right button:nth-child(2) {
+      padding: 0.5em 1em;
+      background: transparent;
+      color: turquoise;
+      border: 1px solid turquoise;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 0px 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   }
+
+   .welcome-section .welcome-section-right button:nth-child(3) {
+      padding: 0.5em 1em;
+      background: transparent;
+      color: rgb(125, 44, 255);
+      border: 1px solid rgb(125, 44, 255);
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      margin: 0px 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   }
+
+   .welcome-section .welcome-section-right button:nth-child(4) {
+      padding: 0.5em 1em;
+      color: white;
+      background: rgb(125, 44, 255);
+      border: 1px solid rgb(125, 44, 255);
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: center;
+      margin-left: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   }
+    .welcome-section .welcome-section-right .calender{
+       display: flex;
+       align-items: center;
+       border: 1px solid rgb(125, 44, 255);
+       border-radius: 5px;
+       margin-right: 5px;
+    }
+    .welcome-section .welcome-section-right .calender input{
+      padding: 7px;  
+      width: 80px;
+      border-left: 1px solid rgb(125, 44, 255);
+      outline: 0;
+    }
+
+    input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator {
+       display:block !important;
+    }
+
+    .welcome-section .welcome-section-right .calender svg{
+       width: 20px;
+       height: 20px;
+       margin-left: 15px;
+       padding-right: 10px;
+    }
+    .welcome-section .welcome-section-right .calender svg path{
+       fill: rgb(125, 44, 255);
+    }
+
+   .import-icon {
+      width: 20px;
+      margin-right: 1em;
+      height: 100%;
+   }
+
+   .import-icon g path {
+      fill: turquoise;
+   }
+
+   .print-icon {
+      width: 20px;
+      margin-right: 1em;
+      height: 100%;
+   }
+
+   .print-icon path {
+      fill: rgb(125, 44, 255);
+   }
+
+   .download-icon {
+      width: 20px;
+      margin-right: 1em;
+   }
+
+   .download-icon g path {
+      fill: white;
+   }
+
+   .svg-icon circle {
+      stroke: #4691f6;
+      stroke-width: 1;
+   }
+
+   .svg-icon {
+      width: 1em;
+      height: 1em;
+   }
+
+   .svg-icon path,
+   .svg-icon polygon,
+   .svg-icon rect {
+      fill: #000000;
+   }
+
+   .svg-icon circle {
+      fill: #000000;
+      stroke-width: 1;
+   }
+
+   .arrow-up {
+      transform: rotate(90deg);
+   }
+
+   .arrow-up path {
+      fill: rgb(77, 250, 77);
+   }
+
+   .arrow-down {
+      transform: rotate(-90deg);
+   }
+
+   .arrow-down path {
+      fill: rgb(255, 35, 35);
+   }
+
+   .dashboard-section-top {
+      display: flex;
+      justify-content: space-between;
+   }
+
+   .dashboard-section-middle {
+      display: flex;
+      justify-content: space-between;
+   }
+
+   .dashboard-section-bottom {
+      display: flex;
+      justify-content: space-between;
+   }
+
+   .card-1 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      background: rgb(255, 255, 255);
+      padding: 1.5em;
+      margin: 1em;
+      border-radius: 0.5em;
+      box-shadow: 0px 0px 1px rgb(189, 189, 189);
+   }
+
+   .card-1 .top-row {
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 1em;
+   }
+   .card-1 .top-row h3 {
+      margin: 0;
+   }
+
+   .card-1 .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+   }
+
+   .card-1 .bottom-row .left-section h1 {
+      margin: 0;
+   }
+
+   .card-1 .bottom-row .left-section .stats {
+      margin-top: 0.3em;
+      color: rgb(77, 250, 77);
+      display: flex;
+      align-items: center;
+   }
+
+   .card-1 .bottom-row .left-section .stats p {
+      margin: 0;
+   }
+
+   .card-1 .bottom-row .left-section .down-stats {
+      margin-top: 0.3em;
+      color: rgb(255, 35, 35);
+      display: flex;
+      align-items: center;
+   }
+
+   .card-1 .bottom-row .left-section .down-stats p {
+      margin: 0;
+   }
+
+   .card-1 .bottom-row .right-section {
+      width: 50%;
+   }
+
+   .card-2 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      background: rgb(255, 255, 255);
+      padding: 1.5em;
+      margin: 1em;
+      border-radius: 0.5em;
+      box-shadow: 0px 0px 1px rgb(189, 189, 189);
+   }
+
+   .card-2 .top-row {
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+   }
+   .card-2 .top-row h3 {
+      margin: 0;
+   }
+
+   .card-2 .middle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+   }
+
+   .card-2 .middle-row p {
+      color: gray;
+   }
+
+   .card-2 .middle-row .filters {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgb(125, 44, 255);
+      border-radius: 5px;
+   }
+
+   .active-cps{
+       border-right: 1px solid rgb(125, 44, 255);
+      background: rgb(125, 44, 255);
+      color: white
+   }
+
+
+   .card-2 .middle-row .filters h4 {
+      padding: 0.5em 1em;
+      margin: 0;
+      cursor: pointer;
+   }
+
+   .card-2 .middle-row .filters h4:nth-child(1) {
+      border-right: 1px solid rgb(125, 44, 255);
+   }
+
+   .card-2 .middle-row .filters h4:nth-child(2) {
+      border-right: 1px solid rgb(125, 44, 255);
+   }
+
+   .card-2 .middle-row .filters h4:nth-child(3) {
+     
+   }
+
+   
+   .card-3 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 65%;
+      background: rgb(255, 255, 255);
+      padding: 1.5em;
+      margin: 1em;
+      border-radius: 0.5em;
+      box-shadow: 0px 0px 1px rgb(189, 189, 189);
+   }
+
+   .card-3 .top-row {
+      background: transparent;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+   }
+   .card-3 .top-row h3 {
+      margin: 0;
+   }
+
+   .card-3 .middle-row p {
+      color: gray;
+   }
+
+   .card-4 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 35%;
+      background: rgb(255, 255, 255);
+      padding: 1.5em;
+      margin: 1em;
+      border-radius: 0.5em;
+      box-shadow: 0px 0px 1px rgb(189, 189, 189);
+   }
+
+   .card-4 .top-row {
+      width: 100%;
+   }
+   .card-4 .top-row h3 {
+      margin: 0;
+   }
+
+   .card-4 .bottom-row {
+      width: 100%;
+   }
+
+   .card-4 .bottom-row a {
+      outline: none;
+      border: none;
+      background: rgb(125, 44, 255);
+      color: white;
+      font-size: 14px;
+      border-radius: 5px;
+      padding: 8px 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-block;
+   }
+</style>
+<div class="main-con" style="background-color: transparent;">
+
+    {{#ifEquals newinstall 1}}
+   <div id="modalMain" class="warrantymodal modalcps">
+
+      <!-- Modal content -->
+      <div class="modal-contentcps">
+         <div class="modal-headercps">
+            <p>Customize the look of your warranty offering</p>
+            <span class="close">X</span>
+         </div>
+         <div class="modal-bodycps">
+            <div class="modal-top">
+               <div class="modal-top-l">
+                  <p><b>Welcome!</b></p>
+                  <p>Congratulations on installing the CPS Extended Warranty Upsell app!</p>
+                  <p>Our app is currently mapping your products to the perfect warranty offer. Please allow 24 hours for completion, our team will email you directly once it's set up.</p>
+                  <p>First things first - please head to the "Settings" tab to customize the look of your warranty offering.</p>
+                  <a href= "/settings?selection=settings2" class="button">Go To Settings</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+</div>
+<style>
+	.modalcps {
+	  position: fixed; /* Stay in place */
+	  z-index: 4; /* Sit on top */
+	  padding-top: 150px; /* Location of the box */
+	  left: 0;
+	  top: 0;
+	  width: 100%; /* Full width */
+	  height: 100%; /* Full height */
+	  overflow: auto; /* Enable scroll if needed */
+	  background-color: rgb(0,0,0); /* Fallback color */
+	  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content */
+	.modal-contentcps {
+	  position: relative;
+	  background-color: #fefefe;
+	  margin: auto;
+	  padding: 0;
+	  border-radius: 5px;
+	  border: 1px solid #888;
+	  width: calc(100% - 20px);
+      max-width: 770px;
+	  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	  -webkit-animation-name: animatetop;
+	  -webkit-animation-duration: 0.4s;
+	  animation-name: animatetop;
+	  animation-duration: 0.4s
+	}
+
+	/* Add Animation */
+	@-webkit-keyframes animatetop {
+	  from {top:-300px; opacity:0} 
+	  to {top:0; opacity:1}
+	}
+
+	@keyframes animatetop {
+	  from {top:-300px; opacity:0}
+	  to {top:0; opacity:1}
+	}
+
+	/* The Close Button */
+   .modal-headercps .close {
+	    font-size: 20px;
+	    font-weight: 300;
+	    cursor: pointer;
+	    position: absolute;
+	    height: 29px;
+	    line-height: 36px;
+	    top: 9px;
+    	right: 9px;
+	    transition-duration: 250ms;
+	    color: #7b889f;
+	    border: 1px solid #ffffff;
+	    width: 36px;
+	    height: 36px;
+	}
+	.modal-headercps .close:hover {
+		border: 1px solid #3d405c;
+		color:#3d405c;
+	}
+
+	.modal-headercps {
+	  padding: 18px 16px;
+	  position: relative;
+	  text-align: center;
+	  border-bottom: 1px solid #e7e7e7;
+	}
+
+	.modal-headercps p {
+		font-size: 16px;
+		font-weight: 500;
+		color: #7b889f;
+		margin: 0;
+	}
+
+	.modal-bodycps {
+		padding: 30px 20px 50px;
+		position: relative;
+	}
+
+	.warrantymodal .plan-img {
+		width:100px;
+		position: absolute;
+		top: 40px;
+		left: 50px;
+	}
+
+   .modal-top-l {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+   }
+
+	.modal-top-l p {
+		font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 20px;
+      font-weight: 400;
+	}
+
+   .modal-top-l b {
+      font-weight: 700;
+   }
+
+   .modal-bodycps .button {
+        display: inline-block;
+        cursor: pointer;
+        color:#ffffff;
+        border-radius:  4px;
+        padding: 8px 20px;
+        background-color: #737DF6;
+        text-decoration: none;
+        margin-top: 10px;
+        font-size: 13px;
+    }
+    .modal-bodycps .button:hover {
+        transition-duration: 250ms;
+        opacity: 0.8;
+    }
+
+</style>
+  {{/ifEquals}}
+
+
+   <div class="welcome-section">
+      <div class="welcome-section-left">
+         <h1>CPS Warranty Dashboard</h1>
+      </div>
+      <div class="welcome-section-right">
+         {{!-- <input type="date"> --}}
+         From:  
+         <div style="margin-left:10px;" class="calender">
+            <svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-352c0-32.363281 26.304688-58.664062 58.667969-58.664062h394.664062c32.363281 0 58.667969 26.300781 58.667969 58.664062v352c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-437.332031c-14.699219 0-26.667969 11.964843-26.667969 26.664062v352c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-352c0-14.699219-11.96875-26.664062-26.667969-26.664062zm0 0"/><path d="m496 202.667969h-480c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h480c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m122.667969 128c-8.832031 0-16-7.167969-16-16v-96c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v96c0 8.832031-7.167969 16-16 16zm0 0"/><path d="m389.332031 128c-8.832031 0-16-7.167969-16-16v-96c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v96c0 8.832031-7.167969 16-16 16zm0 0"/></svg>
+            <input type="date" style="width:140px;" class="datepicker" >
+         </div>
+To:  
+          <div style="margin-left:10px;" class="calender">
+            <svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m453.332031 512h-394.664062c-32.363281 0-58.667969-26.304688-58.667969-58.667969v-352c0-32.363281 26.304688-58.664062 58.667969-58.664062h394.664062c32.363281 0 58.667969 26.300781 58.667969 58.664062v352c0 32.363281-26.304688 58.667969-58.667969 58.667969zm-394.664062-437.332031c-14.699219 0-26.667969 11.964843-26.667969 26.664062v352c0 14.699219 11.96875 26.667969 26.667969 26.667969h394.664062c14.699219 0 26.667969-11.96875 26.667969-26.667969v-352c0-14.699219-11.96875-26.664062-26.667969-26.664062zm0 0"/><path d="m496 202.667969h-480c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h480c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0"/><path d="m122.667969 128c-8.832031 0-16-7.167969-16-16v-96c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v96c0 8.832031-7.167969 16-16 16zm0 0"/><path d="m389.332031 128c-8.832031 0-16-7.167969-16-16v-96c0-8.832031 7.167969-16 16-16s16 7.167969 16 16v96c0 8.832031-7.167969 16-16 16zm0 0"/></svg>
+            <input type="date"  style="width:140px;" class="datepicker2" >
+         </div>
+         {{!-- <button>
+            <svg class="import-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 412 412"
+               style="enable-background:new 0 0 412 412;" xml:space="preserve">
+               <g>
+                  <g>
+                     <g>
+                        <path d="M334,140h-64c-4.4,0-8,3.6-8,8c0,4.4,3.6,8,8,8h64c13.2,0,24,10.8,24,24v192c0,13.2-10.8,24-24,24H78
+				c-13.2,0-24-10.8-24-24V180c0-13.2,10.8-24,24-24h72c4.4,0,8-3.6,8-8c0-4.4-3.6-8-8-8H78c-22,0-40,18-40,40v192c0,22,18,40,40,40
+				h256c22,0,40-18,40-40V180C374,158,356,140,334,140z" />
+                        <path
+                           d="M206,28c4.4,0,8-3.6,8-8V8c0-4.4-3.6-8-8-8c-4.4,0-8,3.6-8,8v12C198,24.4,201.6,28,206,28z" />
+                        <path
+                           d="M129.6,211.6c-3.2,3.2-3.2,8,0,11.2l70.8,70.8c1.6,1.6,3.6,2.4,5.6,2.4s4-0.8,5.6-2.4l70.8-70.8c3.2-3.2,3.2-8,0-11.2
+				s-8-3.2-11.2,0L214,268.8V56c0-4.4-3.6-8-8-8c-4.4,0-8,3.6-8,8v212.8l-57.2-57.2C137.6,208.4,132.8,208.4,129.6,211.6z" />
+                     </g>
+                  </g>
+               </g>
+            </svg>
+            Import
+         </button>
+         <button>
+            <svg class="print-icon" id="_x31__px" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24"
+               width="512" xmlns="http://www.w3.org/2000/svg">
+               <path
+                  d="m21.5 18h-3c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h3c.827 0 1.5-.673 1.5-1.5v-7c0-.827-.673-1.5-1.5-1.5h-19c-.827 0-1.5.673-1.5 1.5v7c0 .827.673 1.5 1.5 1.5h3c.276 0 .5.224.5.5s-.224.5-.5.5h-3c-1.379 0-2.5-1.122-2.5-2.5v-7c0-1.378 1.121-2.5 2.5-2.5h19c1.379 0 2.5 1.122 2.5 2.5v7c0 1.378-1.121 2.5-2.5 2.5z" />
+               <path d="m14.5 21h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+               <path d="m14.5 19h-6c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h6c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+               <path d="m10.5 17h-2c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h2c.276 0 .5.224.5.5s-.224.5-.5.5z" />
+               <path
+                  d="m18.5 7c-.276 0-.5-.224-.5-.5v-4c0-.827-.673-1.5-1.5-1.5h-9c-.827 0-1.5.673-1.5 1.5v4c0 .276-.224.5-.5.5s-.5-.224-.5-.5v-4c0-1.378 1.121-2.5 2.5-2.5h9c1.379 0 2.5 1.122 2.5 2.5v4c0 .276-.224.5-.5.5z" />
+               <path
+                  d="m16.5 24h-9c-1.379 0-2.5-1.122-2.5-2.5v-8c0-.276.224-.5.5-.5h13c.276 0 .5.224.5.5v8c0 1.378-1.121 2.5-2.5 2.5zm-10.5-10v7.5c0 .827.673 1.5 1.5 1.5h9c.827 0 1.5-.673 1.5-1.5v-7.5z" />
+            </svg>
+            Print
+         </button> --}}
+         {{!-- <button> <svg class="download-icon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.827 477.827"
+               style="enable-background:new 0 0 477.827 477.827;" xml:space="preserve">
+               <g>
+                  <g>
+                     <path d="M441.537,160.625c1.489-7.981,2.243-16.082,2.253-24.201C443.699,61.019,382.498-0.035,307.093,0.056
+			c-57.402,0.069-108.63,36.034-128.194,89.999c-35.029-13.944-74.73,3.148-88.675,38.177c-1.207,3.032-2.195,6.146-2.956,9.319
+			c-55.932,8.365-94.492,60.488-86.127,116.42c7.502,50.163,50.596,87.275,101.316,87.254h85.333
+			c9.426,0,17.067-7.641,17.067-17.067c0-9.426-7.641-17.067-17.067-17.067h-85.333c-37.703,0-68.267-30.564-68.267-68.267
+			s30.564-68.267,68.267-68.267c9.426,0,17.067-7.641,17.067-17.067c0.031-18.851,15.338-34.108,34.189-34.077
+			c8.915,0.015,17.471,3.517,23.837,9.757c6.713,6.616,17.519,6.537,24.135-0.176c2.484-2.521,4.123-5.751,4.69-9.245
+			c9.264-55.733,61.954-93.403,117.687-84.139c55.733,9.264,93.403,61.954,84.139,117.687c-0.552,3.323-1.269,6.617-2.146,9.869
+			c-1.962,7.124,0.883,14.701,7.049,18.773c31.416,20.845,39.985,63.212,19.139,94.628c-12.617,19.015-33.9,30.468-56.72,30.522
+			h-51.2c-9.426,0-17.067,7.641-17.067,17.067c0,9.426,7.641,17.067,17.067,17.067h51.2
+			c56.554-0.053,102.357-45.943,102.303-102.497C477.798,208.625,464.526,180.06,441.537,160.625z" />
+                  </g>
+               </g>
+               <g>
+                  <g>
+                     <path d="M353.07,363.292c-6.614-6.387-17.099-6.387-23.712,0l-56.235,56.201V170.558c0-9.426-7.641-17.067-17.067-17.067
+			c-9.426,0-17.067,7.641-17.067,17.067v248.934l-56.201-56.201c-6.78-6.548-17.584-6.36-24.132,0.419
+			c-6.388,6.614-6.388,17.099,0,23.713l85.333,85.333c6.656,6.673,17.463,6.687,24.136,0.03c0.01-0.01,0.02-0.02,0.031-0.03
+			l85.333-85.333C360.038,380.644,359.85,369.84,353.07,363.292z" />
+                  </g>
+            </svg> Download Report</button> --}}
+      </div>
+
+   </div>
+   <div class="dashboard-section">
+      <div class="dashboard-section-top">
+         <div class="card-1">
+            <div class="top-row">
+               <h3>WARRANTY REVENUE</h3>
+               {{!-- <svg class="svg-icon" viewBox="0 0 20 20">
+                  <path fill="none" d="M3.936,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021S5.957,11.116,5.957,10
+                        S5.052,7.979,3.936,7.979z M3.936,11.011c-0.558,0-1.011-0.452-1.011-1.011s0.453-1.011,1.011-1.011S4.946,9.441,4.946,10
+                        S4.494,11.011,3.936,11.011z M16.064,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021s2.021-0.905,2.021-2.021
+                        S17.181,7.979,16.064,7.979z M16.064,11.011c-0.559,0-1.011-0.452-1.011-1.011s0.452-1.011,1.011-1.011S17.075,9.441,17.075,10
+                        S16.623,11.011,16.064,11.011z M10,7.979c-1.116,0-2.021,0.905-2.021,2.021S8.884,12.021,10,12.021s2.021-0.905,2.021-2.021
+                        S11.116,7.979,10,7.979z M10,11.011c-0.558,0-1.011-0.452-1.011-1.011S9.442,8.989,10,8.989S11.011,9.441,11.011,10
+                        S10.558,11.011,10,11.011z"></path>
+               </svg> --}}
+            </div>
+            <div class="bottom-row">
+               <div class="left-section">
+                  <h1 class="revenuedate">${{revenue}}</h1>
+                  <div class="stats">
+                     {{!-- <p>+3.3%</p> --}}
+                     {{!-- <svg class="svg-icon arrow-up" viewBox="0 0 20 20">
+                        <path fill="none" d="M18.271,9.212H3.615l4.184-4.184c0.306-0.306,0.306-0.801,0-1.107c-0.306-0.306-0.801-0.306-1.107,0
+                    L1.21,9.403C1.194,9.417,1.174,9.421,1.158,9.437c-0.181,0.181-0.242,0.425-0.209,0.66c0.005,0.038,0.012,0.071,0.022,0.109
+                    c0.028,0.098,0.075,0.188,0.142,0.271c0.021,0.026,0.021,0.061,0.045,0.085c0.015,0.016,0.034,0.02,0.05,0.033l5.484,5.483
+                    c0.306,0.307,0.801,0.307,1.107,0c0.306-0.305,0.306-0.801,0-1.105l-4.184-4.185h14.656c0.436,0,0.788-0.353,0.788-0.788
+                    S18.707,9.212,18.271,9.212z"></path>
+                     </svg> --}}
+                  </div>
+               </div>
+               <div class="right-section">
+                  <canvas id="warrantyRevenue"></canvas>
+               </div>
+            </div>
+         </div>
+         <div class="card-1">
+            <div class="top-row">
+               <h3>NEW WARRANTY ORDERS</h3>
+               {{!-- <svg class="svg-icon" viewBox="0 0 20 20">
+                  <path fill="none" d="M3.936,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021S5.957,11.116,5.957,10
+                        S5.052,7.979,3.936,7.979z M3.936,11.011c-0.558,0-1.011-0.452-1.011-1.011s0.453-1.011,1.011-1.011S4.946,9.441,4.946,10
+                        S4.494,11.011,3.936,11.011z M16.064,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021s2.021-0.905,2.021-2.021
+                        S17.181,7.979,16.064,7.979z M16.064,11.011c-0.559,0-1.011-0.452-1.011-1.011s0.452-1.011,1.011-1.011S17.075,9.441,17.075,10
+                        S16.623,11.011,16.064,11.011z M10,7.979c-1.116,0-2.021,0.905-2.021,2.021S8.884,12.021,10,12.021s2.021-0.905,2.021-2.021
+                        S11.116,7.979,10,7.979z M10,11.011c-0.558,0-1.011-0.452-1.011-1.011S9.442,8.989,10,8.989S11.011,9.441,11.011,10
+                        S10.558,11.011,10,11.011z"></path>
+               </svg> --}}
+            </div>
+            <div class="bottom-row">
+               <div class="left-section">
+                  <h1 class="warrantyordersdate">{{orderTotal}}</h1>
+                  <div class="down-stats">
+                     {{!-- <p>-2.8%</p> --}}
+                     {{!-- <svg class="svg-icon arrow-down" viewBox="0 0 20 20">
+                        <path fill="none" d="M18.271,9.212H3.615l4.184-4.184c0.306-0.306,0.306-0.801,0-1.107c-0.306-0.306-0.801-0.306-1.107,0
+                    L1.21,9.403C1.194,9.417,1.174,9.421,1.158,9.437c-0.181,0.181-0.242,0.425-0.209,0.66c0.005,0.038,0.012,0.071,0.022,0.109
+                    c0.028,0.098,0.075,0.188,0.142,0.271c0.021,0.026,0.021,0.061,0.045,0.085c0.015,0.016,0.034,0.02,0.05,0.033l5.484,5.483
+                    c0.306,0.307,0.801,0.307,1.107,0c0.306-0.305,0.306-0.801,0-1.105l-4.184-4.185h14.656c0.436,0,0.788-0.353,0.788-0.788
+                    S18.707,9.212,18.271,9.212z"></path>
+                     </svg> --}}
+                  </div>
+               </div>
+               <div class="right-section">
+                  <canvas id="newWarrantyOrders"></canvas>
+               </div>
+            </div>
+         </div>
+         <div class="card-1">
+            <div class="top-row">
+               <h3>ATTACHMENT RATE</h3>
+               {{!-- <svg class="svg-icon" viewBox="0 0 20 20">
+                  <path fill="none" d="M3.936,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021S5.957,11.116,5.957,10
+                          S5.052,7.979,3.936,7.979z M3.936,11.011c-0.558,0-1.011-0.452-1.011-1.011s0.453-1.011,1.011-1.011S4.946,9.441,4.946,10
+                          S4.494,11.011,3.936,11.011z M16.064,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021s2.021-0.905,2.021-2.021
+                          S17.181,7.979,16.064,7.979z M16.064,11.011c-0.559,0-1.011-0.452-1.011-1.011s0.452-1.011,1.011-1.011S17.075,9.441,17.075,10
+                          S16.623,11.011,16.064,11.011z M10,7.979c-1.116,0-2.021,0.905-2.021,2.021S8.884,12.021,10,12.021s2.021-0.905,2.021-2.021
+                          S11.116,7.979,10,7.979z M10,11.011c-0.558,0-1.011-0.452-1.011-1.011S9.442,8.989,10,8.989S11.011,9.441,11.011,10
+                          S10.558,11.011,10,11.011z"></path>
+               </svg> --}}
+            </div>
+            <div class="bottom-row">
+               <div class="left-section">
+                  <h1 class="attachmentdate">{{attachmentRate}}%</h1>
+                  <div class="stats">
+                     {{!-- <p>+2.8%</p> --}}
+                     {{!-- <svg class="svg-icon arrow-up" viewBox="0 0 20 20">
+                        <path fill="none" d="M18.271,9.212H3.615l4.184-4.184c0.306-0.306,0.306-0.801,0-1.107c-0.306-0.306-0.801-0.306-1.107,0
+                      L1.21,9.403C1.194,9.417,1.174,9.421,1.158,9.437c-0.181,0.181-0.242,0.425-0.209,0.66c0.005,0.038,0.012,0.071,0.022,0.109
+                      c0.028,0.098,0.075,0.188,0.142,0.271c0.021,0.026,0.021,0.061,0.045,0.085c0.015,0.016,0.034,0.02,0.05,0.033l5.484,5.483
+                      c0.306,0.307,0.801,0.307,1.107,0c0.306-0.305,0.306-0.801,0-1.105l-4.184-4.185h14.656c0.436,0,0.788-0.353,0.788-0.788
+                      S18.707,9.212,18.271,9.212z"></path>
+                     </svg> --}}
+                  </div>
+               </div>
+               <div class="right-section">
+                  <canvas id="attachmentRate"></canvas>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="dashboard-section-middle">
+         <div class="card-2">
+            <div class="top-row">
+               <h3>WARRANTY REVENUE</h3>
+               {{!-- <svg class="svg-icon" viewBox="0 0 20 20">
+                  <path fill="none" d="M3.936,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021S5.957,11.116,5.957,10
+                          S5.052,7.979,3.936,7.979z M3.936,11.011c-0.558,0-1.011-0.452-1.011-1.011s0.453-1.011,1.011-1.011S4.946,9.441,4.946,10
+                          S4.494,11.011,3.936,11.011z M16.064,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021s2.021-0.905,2.021-2.021
+                          S17.181,7.979,16.064,7.979z M16.064,11.011c-0.559,0-1.011-0.452-1.011-1.011s0.452-1.011,1.011-1.011S17.075,9.441,17.075,10
+                          S16.623,11.011,16.064,11.011z M10,7.979c-1.116,0-2.021,0.905-2.021,2.021S8.884,12.021,10,12.021s2.021-0.905,2.021-2.021
+                          S11.116,7.979,10,7.979z M10,11.011c-0.558,0-1.011-0.452-1.011-1.011S9.442,8.989,10,8.989S11.011,9.441,11.011,10
+                          S10.558,11.011,10,11.011z"></path>
+               </svg> --}}
+            </div>
+            <div class="middle-row">
+               <p style="margin-top: 1em">
+                  {{!-- Revenue is the income that a business has from its normal business
+                  activities,<br />usually from the sale of goods & services to
+                  customers --}}
+               </p>
+               <div class="filters">
+                  <h4 data-selection="today">Today</h4>
+                  <h4 data-selection="week">Week</h4>
+                  <h4 data-selection="month" class="active-cps">Month</h4>
+                  <h4 data-selection="year">Year</h4>
+               </div>
+            </div>
+            <div class="bottom-row" style="width: 100%; margin-top: 2em">
+               <canvas id="warrantyRevenueDetailed"></canvas>
+            </div>
+         </div>
+      </div>
+      <div class="dashboard-section-bottom">
+         <div class="card-3">
+            <div class="top-row">
+               <h3>MONTHLY WARRANTY SALES</h3>
+               {{!-- <svg class="svg-icon" viewBox="0 0 20 20">
+                  <path fill="none" d="M3.936,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021S5.957,11.116,5.957,10
+                                S5.052,7.979,3.936,7.979z M3.936,11.011c-0.558,0-1.011-0.452-1.011-1.011s0.453-1.011,1.011-1.011S4.946,9.441,4.946,10
+                                S4.494,11.011,3.936,11.011z M16.064,7.979c-1.116,0-2.021,0.905-2.021,2.021s0.905,2.021,2.021,2.021s2.021-0.905,2.021-2.021
+                                S17.181,7.979,16.064,7.979z M16.064,11.011c-0.559,0-1.011-0.452-1.011-1.011s0.452-1.011,1.011-1.011S17.075,9.441,17.075,10
+                                S16.623,11.011,16.064,11.011z M10,7.979c-1.116,0-2.021,0.905-2.021,2.021S8.884,12.021,10,12.021s2.021-0.905,2.021-2.021
+                                S11.116,7.979,10,7.979z M10,11.011c-0.558,0-1.011-0.452-1.011-1.011S9.442,8.989,10,8.989S11.011,9.441,11.011,10
+                                S10.558,11.011,10,11.011z"></path>
+               </svg> --}}
+            </div>
+            <div class="middle-row">
+               <p style="margin-top: 1em">
+                  Revenue is the income that a business has from its normal business
+                  activities, usually from the sale of goods & services to customers
+               </p>
+            </div>
+
+            <div class="bottom-row" style="width: 100%; margin-top: 2em">
+               <canvas id="monthlyWarrantySales"></canvas>
+            </div>
+         </div>
+         <div class="card-4">
+            <div class="top-row">
+               <h3>CONTACT CPS</h3>
+               <p style="margin-top: 1em; color: gray">
+                  Speak with our agents on the phone
+               </p>
+               <p style="margin-top: 1em; color: gray">
+                  <strong style="color: black">Toll Free US:</strong>
+                  (800)905-0445
+               </p>
+               <p style="margin-top: 0.5em; color: gray">
+                  <strong style="color: black">International:</strong> +1 (347)
+                  535-3616
+               </p>
+               <br />
+               <h4>Call Center Hours:</h4>
+               <p style="margin-top: 0.5em; color: gray">Monday-Thursday: 9am - 6pm; EST</p>
+               <p style="margin-top: 0.5em; color: gray">Friday: 9am - 5pm; EST</p>
+               <p style="margin-top: 0.5em; color: gray">Saturday, Sunday: Closed</p>
+            </div>
+
+            <div class="bottom-row">
+               <a style="text-decoration:none" id="modal-btn">Email Us</a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Javascript -->
+   {{!-- chart js --}}
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script>
+      //Warranty Revenue Chart
+      var warrantyRevenue = new Chart(
+         document.getElementById("warrantyRevenue").getContext("2d"),
+         {
+            type: "line",
+            data: {
+               labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug"],
+               datasets: [
+                  {
+                     data: [8400, 8100, 8800, 8400, 8700, 8200, 8150, 8350],
+                     label: "Total",
+                     borderColor: "rgb(125, 44, 255)",
+                     backgroundColor: "#7bb6dd",
+                     fill: false,
+                     tension: 0.3,
+                     pointRadius: 0,
+                  },
+               ],
+            },
+            options: {
+               plugins: {
+                  legend: {
+                     display: false,
+                  },
+                  tooltip: {
+                     enabled: false,
+                  },
+               },
+               scales: {
+                  y: {
+                     display: false,
+                  },
+                  x: {
+                     display: false,
+                  },
+               },
+            },
+         }
+      );
+
+      //Warranty Orders Chart
+      var newWarrantyOrders = new Chart(
+         document.getElementById("newWarrantyOrders").getContext("2d"),
+         {
+            type: "bar",
+            data: {
+               labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+               datasets: [
+                  {
+                     data: [50, 100, 35, 45, 12, 78, 48, 34, 10],
+                     label: "Total",
+                     borderColor: "rgb(125, 44, 255)",
+                     backgroundColor: "rgb(125, 44, 255)",
+                     borderWidth: 0,
+                  },
+               ],
+            },
+            options: {
+               plugins: {
+                  legend: {
+                     display: false,
+                  },
+                  tooltip: {
+                     enabled: false,
+                  },
+               },
+               scales: {
+                  y: {
+                     display: false,
+                  },
+                  x: {
+                     display: false,
+                  },
+               },
+            },
+         }
+      );
+
+      //Attachment Rate Chart
+      var attachmentRate = new Chart(
+         document.getElementById("attachmentRate").getContext("2d"),
+         {
+            type: "line",
+            data: {
+               labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+               datasets: [
+                  {
+                     data: [8100, 8200, 8134, 8195, 8110],
+                     label: "Total",
+                     borderColor: "rgb(125, 44, 255)",
+                     backgroundColor: "#7bb6dd",
+                     fill: false,
+                     tension: 0.3,
+                     pointRadius: 0,
+                  },
+               ],
+            },
+            options: {
+               plugins: {
+                  legend: {
+                     display: false,
+                  },
+                  tooltip: {
+                     enabled: false,
+                  },
+               },
+               scales: {
+                  y: {
+                     display: false,
+                  },
+                  x: {
+                     display: false,
+                  },
+               },
+            },
+         }
+      );
+
+      //Warranty Revenue Detailed Chart
+
+     
+      var kdk="{{attachmentRate}}";
+      var warrantyRevMonthArrayJS = "{{warrantyRevMonthArray}}"
+      console.log(warrantyRevMonthArrayJS)
+      var warrantyRevArrayJS = "{{warrantyRevArray}}"
+      var warrantyRevenueDetailed = new Chart(
+         document.getElementById("warrantyRevenueDetailed").getContext("2d"),
+         {
+            type: "line",
+            data: {
+               labels: warrantyRevMonthArrayJS.split(","),
+               datasets: [
+                  {
+                     data: warrantyRevArrayJS.split(","),
+                     label: "Total",
+                     borderColor: "rgb(125, 44, 255)",
+                     backgroundColor: "#7bb6dd",
+                     fill: true,
+                     tension: 0.3,
+                     pointRadius: 4,
+                  },
+               ],
+            },
+            options: {
+               plugins: {
+                  legend: {
+                     display: false,
+                  },
+               },
+               scales: {
+                  y: {
+                     ticks: {
+                        callback: function (value, index, values) {
+                           return "$" + value;
+                        },
+                     },
+                  },
+               },
+            },
+         }
+      );
+var monthlySalesMonthArrayJS = "{{monthlySalesMonthArray}}"
+var monthlySalesArrayJS = "{{monthlySalesArray}}"
+console.log(monthlySalesMonthArrayJS)
+
+      //Monthly Warranty Sales Chart
+      var monthlyWarrantySales = new Chart(
+         document.getElementById("monthlyWarrantySales").getContext("2d"),
+         {
+            type: "bar",
+            data: {
+               labels: monthlySalesMonthArrayJS.split(","),
+               datasets: [
+                  {
+                     data: monthlySalesArrayJS.split(","),
+                     label: "Total",
+                     borderColor: "rgb(125, 44, 255)",
+                     backgroundColor: "rgb(125, 44, 255)",
+                     borderWidth: 0,
+                     barPercentage: 5,
+                     barThickness: 15,
+                     maxBarThickness: 15,
+                     minBarLength: 2,
+                  },
+               ],
+            },
+            options: {
+               plugins: {
+                  legend: {
+                     display: false,
+                  },
+               },
+               scales: {
+                  x: {
+                     grid: {
+                        display: false,
+                     },
+                  },
+                  y: {
+                     beginAtZero: false,
+                  },
+               },
+               ticks: {
+                  min: 0,
+                  max: 100,
+                  stepSize: 20,
+               },
+            },
+         }
+      );
+
+
+   </script>
+
+   <script>
+
+
+      function getFormattedDate() {
+    var start = new Date();
+  
+   var year = start.getFullYear();
+ 
+   var month = (1 + start.getMonth()).toString();
+   month = month.length > 1 ? month : '0' + month;
+ 
+   var day = start.getDate().toString();
+   day = day.length > 1 ? day : '0' + day;
+   
+   return year + '/' + month + '/' + day;
+ }
+
+document.querySelector('.datepicker').valueAsDate = new Date();
+document.querySelector('.datepicker2').valueAsDate = new Date();
+
+
+$(".datepicker").change(function(){
+   var dateChosen = $(this).val()
+   console.log(dateChosen)
+
+     fetch(`${appUrl}/homewithdate?selection=home&date='${dateChosen}'&date2=${$(".datepicker2").val()}&storehash=${storeHash}`)
+         .then(function(response) {
+            return response.json();
+         }).then(function(data) {
+            console.log(data)
+            var attachmentRate = data.attachmentRate
+            var orderTotal = data.orderTotal
+            var revenue = data.revenue
+            console.log(attachmentRate,orderTotal,revenue)
+                  $(".attachmentdate").html(attachmentRate + "%")
+                  $(".warrantyordersdate").html(orderTotal)
+                  $(".revenuedate").html("$" + revenue)
+          
+            
+         });
+   })
+
+
+   $(".datepicker2").change(function(){
+   var dateChosen = $(this).val()
+   console.log(dateChosen)
+
+     fetch(`${appUrl}/homewithdate?selection=home&date='${$(".datepicker").val()}'&date2=${dateChosen}&storehash=${storeHash}`)
+         .then(function(response) {
+            return response.json();
+         }).then(function(data) {
+            console.log(data)
+            var attachmentRate = data.attachmentRate
+            var orderTotal = data.orderTotal
+            var revenue = data.revenue
+            console.log(attachmentRate,orderTotal,revenue)
+            setTimeout(function(){
+                  $(".attachmentdate").html(attachmentRate + "%")
+                  $(".warrantyordersdate").html(orderTotal)
+                  $(".revenuedate").html("$" + revenue)
+            }, 500)
+         });
+   })
+
+$("h4").click(function(){
+$(".active-cps").removeClass("active-cps")
+$(this).addClass("active-cps")
+var selection = $(this).data("selection")
+console.log(selection)
+
+  fetch(`${appUrl}/warranty_rev_selection?selection=${selection}&appurl=&storehash=${storeHash}`)
+         .then(function(response) {
+            return response.json();
+         }).then(function(data) {
+            var monthArr = data.warrantyRevMonthArray
+            var revArray = data.warrantyRevArray
+            warrantyRevenueDetailed.config.data.labels = monthArr
+            warrantyRevenueDetailed.config.data.datasets[0].data = revArray
+            warrantyRevenueDetailed.update()
+         });
+})
+
+
+
+   </script>
+
+
+   <div id="modalMain" class="message-modal modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <p><i class="far fa-edit"></i>Message</p>
+        </div>
+        
+        
+            <textarea name="textbody" id="txtEmailBody"></textarea>
+            <p class="message-btns">
+            <button type="button" id="submitEmail" class="purple-btn">Send</button>
+            <button  type="button" class="close"  id="cancelEmail">Cancel</button>
+        </p>
+
+
+        
+    </div>
+
+</div>
+
+<script>
+    $("#submitEmail").click(function(){
+         fetch(`${appUrl}/form_submit?appurl=&storehash=${storeHash}`,{   
+            method: "POST",
+            body: JSON.stringify({
+               textbody: $("#txtEmailBody").val()
+            }),
+         
+            headers: {
+               "Content-type": "application/json; charset=UTF-8"
+            }
+            })
+               .then(data => {
+                  console.log(data); // JSON data parsed by `data.json()` call
+        });
+        modal.style.display = "none";
+        $("#txtEmailBody").val("");
+   });
+
+   $("#cancelEmail").click(function(){
+         modal.style.display = "none";
+   });
+	// Get the modal
+	var modal = document.getElementById("modalMain");
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("modal-btn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}
+</script>
+
+
+   {{> footer}}

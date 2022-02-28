@@ -1,0 +1,127 @@
+{{> header}}
+
+
+<style>
+  #example span {
+    display:none; 
+}
+
+    th{
+        text-align: center;
+    }
+
+      th{
+        text-align: center;
+    }
+    .pagination {
+  display: inline-block;
+}
+
+.pagination ul li {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+   tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+
+.pagination ul li {
+  list-style: none;
+}
+
+.pagination ul li a {
+  text-decoration: none;
+}
+
+
+</style>
+<div class="main-con">
+<h2>Orders</h2>
+
+<table id="example" class="styled-table">
+    <thead>
+        <tr>
+        <th>Date</th>
+        <th>SKU</th>
+        <th>Order Id</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each orders}}
+        <tr>
+          
+        <td style="text-align:center"><span>YYYYMMDD</span>{{dateFormat this.dateadded format='MM/DD/yyyy'}}</td>
+        <td style="text-align:center">{{this.sku}}</td>
+        <script>
+          function call(){
+              var url = window.location.ancestorOrigins[0]
+
+            var urll = `<td style="text-align:center"><a target="_blank" href="post.php?post={{this.item_id}}&action=edit">{{this.bigcom_orderid}}</a></td>`
+           document.write(urll)
+          }
+
+          call();
+        </script>
+       
+        <td style="text-align:center">${{this.price}}</td>
+        <td style="text-align:center">{{this.quantity}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+      <tfoot>
+            <tr>
+                <th>Date</th>
+                <th>SKU</th>
+                <th>Order ID</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </tfoot>
+  
+</table>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+</body>  
+</html>  
+
+<script>
+
+$('#example tfoot th').each( function () {
+        var title = $(this).text();
+        if(title !== ""){
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        }
+    } );
+
+ var table = $('#example').DataTable({
+        initComplete: function () {
+            // Apply the search
+            this.api().columns().every( function () {
+                var that = this;
+ 
+                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
+        }
+    });
+</script>
