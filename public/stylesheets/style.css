@@ -1,0 +1,43 @@
+body, html {
+  color: #252525;
+  font-weight: 400;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px 15px 20px 270px;
+  background-color: #F7F8FA;
+  margin: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination p {
+  margin-top: 22px;
+}
+
+.main-con {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px;
+  padding-bottom: 10px;
+  background-color: #ffffff;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+b {
+  font-weight: 600;
+}
+
