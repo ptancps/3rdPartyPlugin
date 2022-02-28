@@ -1,0 +1,28 @@
+{
+  "name": "bigcommerceapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cookies": "^0.8.0",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7",
+    "handlebars-paginate": "^0.1.0",
+    "hbs": "^4.1.1",
+    "http-errors": "~1.6.3",
+    "mailgun-js": "^0.22.0",
+    "moment": "^2.29.1",
+    "morgan": "~1.9.1",
+    "mssql": "^6.3.1",
+    "node-bigcommerce": "^4.1.0",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.7"
+  }
+}
